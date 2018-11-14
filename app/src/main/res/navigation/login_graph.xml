@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/main_graph" app:startDestination="@id/loginActivity">
+            android:id="@+id/login_graph" app:startDestination="@id/loginFragment">
 
-    <activity android:id="@+id/loginActivity" android:name="com.uvezem.LoginActivity" android:label="LoginActivity"/>
+    <fragment android:id="@+id/loginFragment" android:name="com.uvezem.login.LoginFragment"
+              android:label="LoginFragment">
+    </fragment>
+    <activity android:id="@+id/homeActivity" android:name="com.uvezem.main.HomeActivity" android:label="HomeActivity"/>
 </navigation>
