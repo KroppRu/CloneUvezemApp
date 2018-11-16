@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="8dp">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+                android:id="@+id/imageCalendar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_calendar_icon" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"/>
+
+        <TextView
+                android:id="@+id/date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="дата загрузки" app:layout_constraintTop_toTopOf="@+id/imageCalendar"
+                app:layout_constraintBottom_toBottomOf="@+id/imageCalendar"
+                app:layout_constraintStart_toEndOf="@+id/imageCalendar" android:layout_marginStart="8dp"/>
+
+        <TextView
+                android:id="@+id/summTitle"
+                android:layout_width="wrap_content" android:layout_height="19dp"
+                android:text="Сумма"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/imageCalendar" android:layout_marginTop="16dp"/>
+
+        <TextView
+                android:id="@+id/summValue"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                tools:text="14000" app:layout_constraintStart_toEndOf="@+id/summTitle"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/summTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/summTitle"/>
+
+        <TextView
+                android:id="@+id/loadPlaceTitle"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Место загрузки"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/date_text_view"
+                app:layout_constraintTop_toTopOf="@+id/imageCalendar"
+                app:layout_constraintBottom_toBottomOf="@+id/imageCalendar"/>
+
+        <TextView
+                android:id="@+id/loadPlaceValue"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                tools:text="Красноярск"
+                app:layout_constraintTop_toTopOf="@+id/imageCalendar"
+                app:layout_constraintBottom_toBottomOf="@+id/imageCalendar"
+                app:layout_constraintStart_toEndOf="@+id/loadPlaceTitle" android:layout_marginStart="8dp"/>
+
+        <TextView
+                android:id="@+id/deliveryPlaceTitle"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Место выгрузки"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/date_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/loadPlaceTitle" android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:id="@+id/deliveryPlaceValue"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                tools:text="Боготол"
+                app:layout_constraintStart_toEndOf="@+id/deliveryPlaceTitle" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/loadPlaceValue" android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
