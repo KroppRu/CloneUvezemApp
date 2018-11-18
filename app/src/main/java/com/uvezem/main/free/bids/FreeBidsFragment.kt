@@ -22,17 +22,8 @@ class FreeBidsFragment : Fragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         free_bid_rv.layoutManager = layoutManager
         val adapter = FreeBidsAdapter(generateFake())
-        adapter.listener = object : FreeBidsAdapter.ClickListener {
-            override fun onItemClick(v: View) {
-                adapter.updateElement(free_bid_rv.indexOfChild(v))
-            }
 
-        }
         free_bid_rv.adapter = adapter
-    }
-
-    interface RvElementClickListener {
-        fun onClick(v: View)
     }
 
     private fun generateFake(): List<Delivery> {
@@ -54,43 +45,43 @@ class FreeBidsFragment : Fragment() {
             addressWarehouse = "Красноярск",
             deliveryPlace = "Ачинск"
         )
-//        val d4 = Delivery(
-//            date = "20.02.2018",
-//            priceDelivery = 18000,
-//            addressWarehouse = "Красноярск",
-//            deliveryPlace = "Ачинск"
-//        )
-//        val d5 = Delivery(
-//            date = "20.02.2018",
-//            priceDelivery = 19000,
-//            addressWarehouse = "Красноярск",
-//            deliveryPlace = "Ачинск"
-//        )
-//        val d6 = Delivery(
-//            date = "20.02.2018",
-//            priceDelivery = 20000,
-//            addressWarehouse = "Красноярск",
-//            deliveryPlace = "Ачинск"
-//        )
-//        val d7 = Delivery(
-//            date = "20.02.2018",
-//            priceDelivery = 30000,
-//            addressWarehouse = "Красноярск",
-//            deliveryPlace = "Ачинск"
-//        )
-//        val d8 = Delivery(
-//            date = "20.02.2018",
-//            priceDelivery = 40000,
-//            addressWarehouse = "Красноярск",
-//            deliveryPlace = "Ачинск"
-//        )
-//        val d9 = Delivery(
-//            date = "20.02.2018",
-//            priceDelivery = 50000,
-//            addressWarehouse = "Красноярск",
-//            deliveryPlace = "Ачинск"
-//        )
+        val d4 = Delivery(
+            date = "20.02.2018",
+            priceDelivery = 18000,
+            addressWarehouse = "Красноярск",
+            deliveryPlace = "Ачинск"
+        )
+        val d5 = Delivery(
+            date = "20.02.2018",
+            priceDelivery = 19000,
+            addressWarehouse = "Красноярск",
+            deliveryPlace = "Ачинск"
+        )
+        val d6 = Delivery(
+            date = "20.02.2018",
+            priceDelivery = 20000,
+            addressWarehouse = "Красноярск",
+            deliveryPlace = "Ачинск"
+        )
+        val d7 = Delivery(
+            date = "20.02.2018",
+            priceDelivery = 30000,
+            addressWarehouse = "Красноярск",
+            deliveryPlace = "Ачинск"
+        )
+        val d8 = Delivery(
+            date = "20.02.2018",
+            priceDelivery = 40000,
+            addressWarehouse = "Красноярск",
+            deliveryPlace = "Ачинск"
+        )
+        val d9 = Delivery(
+            date = "20.02.2018",
+            priceDelivery = 50000,
+            addressWarehouse = "Красноярск",
+            deliveryPlace = "Ачинск"
+        )
 
-        return listOf(d1, d2, d3)
+        return listOf(d1, d2, d3, d4, d5, d6, d7, d8, d9)
     }
 }

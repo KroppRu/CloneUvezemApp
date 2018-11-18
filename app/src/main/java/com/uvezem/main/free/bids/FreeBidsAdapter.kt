@@ -9,7 +9,7 @@ import com.uvezem.model.Delivery
 
 class FreeBidsAdapter(private var deliveries: List<Delivery>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var listener: ClickListener? = null
+    var elementClickListener: ((Int) -> Unit)? = null
 
     companion object {
         private val COMPACT_TYPE = 0
@@ -26,7 +26,7 @@ class FreeBidsAdapter(private var deliveries: List<Delivery>) : RecyclerView.Ada
         clickedItems = Array(deliveries.size) { _ -> false }
     }
 
-    fun updateElement(position: Int) {
+    private fun updateElement(position: Int) {
         clickedItems[position] = !clickedItems[position]
         notifyItemChanged(position)
     }
@@ -34,11 +34,9 @@ class FreeBidsAdapter(private var deliveries: List<Delivery>) : RecyclerView.Ada
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == COMPACT_TYPE) {
             val itemView = LayoutInflater.from(parent.context).inflate(R.layout.bid_compact_item, parent, false)
-            itemView.setOnClickListener { _ -> listener?.onItemClick(itemView) }
             FreeBidViewHolderCompact(itemView)
         } else {
             val itemView = LayoutInflater.from(parent.context).inflate(R.layout.bid_full_item, parent, false)
-            itemView.setOnClickListener { _ -> listener?.onItemClick(itemView) }
             FreeBidViewHolderFull(itemView)
         }
     }
@@ -59,6 +57,7 @@ class FreeBidsAdapter(private var deliveries: List<Delivery>) : RecyclerView.Ada
         val delivery = deliveries[position]
         when (holder) {
             is FreeBidViewHolderCompact -> {
+                holder.elementClickListener = { updateElement(it) }
                 holder.dateTextView?.text = delivery.date
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
@@ -66,6 +65,7 @@ class FreeBidsAdapter(private var deliveries: List<Delivery>) : RecyclerView.Ada
             }
 
             is FreeBidViewHolderFull -> {
+                holder.elementClickListener = { updateElement(it) }
                 holder.dateTextView?.text = delivery.date
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
