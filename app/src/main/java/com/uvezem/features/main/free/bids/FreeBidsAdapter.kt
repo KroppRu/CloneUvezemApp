@@ -1,4 +1,4 @@
-package com.uvezem.main.free.bids
+package com.uvezem.features.main.free.bids
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

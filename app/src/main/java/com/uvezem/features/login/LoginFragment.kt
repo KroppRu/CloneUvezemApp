@@ -1,4 +1,4 @@
-package com.uvezem.login
+package com.uvezem.features.login
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

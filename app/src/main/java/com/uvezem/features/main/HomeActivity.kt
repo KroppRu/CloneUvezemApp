@@ -1,4 +1,4 @@
-package com.uvezem.main
+package com.uvezem.features.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.uvezem.login
+package com.uvezem.features.login
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
