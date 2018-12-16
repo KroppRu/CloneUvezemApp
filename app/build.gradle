@@ -39,7 +39,10 @@ dependencies {
 
     //retrofit
     implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.5.0'
+    implementation group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.5.0'
+    implementation group: 'com.squareup.retrofit2', name: 'converter-scalars', version: '2.5.0'
+    implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: '2.5.0'
 
     //android x
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha07'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha08'
 }

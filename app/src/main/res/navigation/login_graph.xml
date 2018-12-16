@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/login_graph" app:startDestination="@id/loginFragment">
 
-    <fragment android:id="@+id/loginFragment" android:name="com.uvezem.features.login.LoginFragment"
+    <fragment android:id="@+id/loginFragment" android:name="com.uvezem.features.login.ui.LoginFragment"
               android:label="LoginFragment">
     </fragment>
     <activity android:id="@+id/homeActivity" android:name="com.uvezem.features.main.HomeActivity" android:label="HomeActivity"/>
