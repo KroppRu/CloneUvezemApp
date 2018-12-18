@@ -4,11 +4,11 @@ import com.uvezem.model.UserApp
 
 interface LoginView {
 
-    fun setUserData(userApp: UserApp)
-
     fun showProgress()
 
     fun hideProgress()
 
     fun showError(error: String)
+
+    fun next()
 }

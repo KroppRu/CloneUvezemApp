@@ -14,17 +14,17 @@ class App : Application() {
     companion object {
         lateinit var instance: App
             private set
+        lateinit var apiRetrofit: ApiRetrofit
+            private set
     }
 
-    lateinit var apiRetrofit: ApiRetrofit
-
-    private val okHttpClient: OkHttpClient
-        get() = OkHttpClient.Builder()
+    private val okHttpClient: OkHttpClient =
+        OkHttpClient.Builder()
             .readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
-    private val retrofit: Retrofit
-        get() = Retrofit.Builder()
+    private val retrofit: Retrofit =
+        Retrofit.Builder()
             .baseUrl("http://api.vital.softwer.ru/v2/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
