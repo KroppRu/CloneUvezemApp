@@ -9,7 +9,7 @@ class LoginRepository constructor(private val apiRetrofit: ApiRetrofit) {
 
     fun loginUser(login: String, pass: String): Single<UserApp> {
         val byteArray = "$login:$pass".toByteArray()
-        val base64String = Base64.encode(byteArray, Base64.DEFAULT)
+        val base64String = Base64.encodeToString(byteArray, Base64.NO_WRAP)
         return apiRetrofit.loginUser("Basic $base64String")
     }
 }

@@ -3,6 +3,6 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/home_graph" app:startDestination="@id/freeBidsFragment">
 
-    <fragment android:id="@+id/freeBidsFragment" android:name="com.uvezem.features.main.free.bids.FreeBidsFragment"
+    <fragment android:id="@+id/freeBidsFragment" android:name="com.uvezem.features.main.free.bids.ui.FreeBidsFragment"
               android:label="FreeBidsFragment"/>
 </navigation>

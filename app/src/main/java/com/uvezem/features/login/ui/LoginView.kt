@@ -1,7 +1,5 @@
 package com.uvezem.features.login.ui
 
-import com.uvezem.model.UserApp
-
 interface LoginView {
 
     fun showProgress()

@@ -5,12 +5,15 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.uvezem.App
 import com.uvezem.R
 import com.uvezem.data.LoginRepository
-import com.uvezem.features.login.domain.LoginInteractorImpl
+import com.uvezem.domain.LoginInteractorImpl
+import com.uvezem.domain.UserInteractorImpl
 import com.uvezem.features.login.presenter.LoginPresenter
 import com.uvezem.features.prefs.Preference
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -32,8 +35,9 @@ class LoginFragment : Fragment(), LoginView {
     private fun initDependency() {
         val prefs = Preference()
         val loginRepository = LoginRepository(App.apiRetrofit)
-        val loginInteractor = LoginInteractorImpl(loginRepository, prefs)
-        presenter = LoginPresenter(this, loginInteractor)
+        val loginInteractor = LoginInteractorImpl(loginRepository)
+        val userInteractor = UserInteractorImpl(prefs)
+        presenter = LoginPresenter(this, loginInteractor, userInteractor)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,15 +52,17 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     override fun showProgress() {
-
+        pgView.visibility = View.VISIBLE
+        pg.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-
+        pgView.visibility = View.GONE
+        pg.visibility = View.GONE
     }
 
     override fun showError(error: String) {
-
+        Toast.makeText(context, error, LENGTH_LONG).show()
     }
 
     override fun next() {

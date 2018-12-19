@@ -1,13 +1,13 @@
-package com.uvezem.features.main.free.bids
+package com.uvezem.features.main.free.bids.presenter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.uvezem.R
-import com.uvezem.model.Delivery
+import com.uvezem.model.DeliveriesItem
 
-class FreeBidsAdapter(private var deliveries: List<Delivery>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var elementClickListener: ((Int) -> Unit)? = null
 

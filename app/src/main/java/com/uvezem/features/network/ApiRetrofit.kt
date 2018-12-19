@@ -8,8 +8,8 @@ import retrofit2.http.Headers
 
 interface ApiRetrofit {
 
+    @GET("/v2/user/login")
     @Headers("Content-Type: application/json")
-    @GET("/user/login")
     fun loginUser(@Header("Authorization") base64: String): Single<UserApp>
 
 
