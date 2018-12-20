@@ -22,6 +22,14 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
         fun onItemClick(v: View)
     }
 
+    fun updateDeliveries(deliveries: List<DeliveriesItem>) {
+        this.deliveries = deliveries
+        //val oldClickedItems = clickedItems.clone()
+        clickedItems = Array(deliveries.size) { _ -> false }
+        //clickedItems = clickedItems.copyOf(deliveries.size)
+        notifyDataSetChanged()
+    }
+
     init {
         clickedItems = Array(deliveries.size) { _ -> false }
     }

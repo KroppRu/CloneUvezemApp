@@ -21,25 +21,23 @@ class FreeBidsFragment : Fragment(), FreeBidsView {
     private lateinit var presenter: FreeBidsPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        initDependency()
         return inflater.inflate(R.layout.free_bids_fragment, container, false)
     }
 
     private fun initDependency() {
         val bidsRepository = BidsRepository(App.apiRetrofit, Preference())
         val bidsInteractor = BidsInteractorImpl(bidsRepository)
-        presenter = FreeBidsPresenter(this, bidsInteractor)
+        val adapter = FreeBidsAdapter(listOf())
+        free_bid_rv.adapter = adapter
+        presenter = FreeBidsPresenter(this, bidsInteractor, adapter)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         free_bid_rv.layoutManager = layoutManager
-
+        initDependency()
         presenter.loadData()
-//        val adapter = FreeBidsAdapter(generateFake())
-//
-//        free_bid_rv.adapter = adapter
     }
 
     override fun showProgress() {

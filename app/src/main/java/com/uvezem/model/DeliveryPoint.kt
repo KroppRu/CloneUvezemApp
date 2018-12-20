@@ -1,9 +1,13 @@
 package com.uvezem.model
 
-data class DeliveryPoint(val address: String = "",
-                         val store: String = "",
-                         val lon: Double = 0.0,
-                         val city: String = "",
-                         val subjectRF: String = "",
-                         val dateDelivery: String = "",
-                         val lat: Double = 0.0)
+import com.google.gson.annotations.SerializedName
+
+data class DeliveryPoint(
+    @SerializedName("Address") val address: String = "",
+    @SerializedName("Store") val store: String = "",
+    @SerializedName("Lon") val lon: Double = 0.0,
+    @SerializedName("City") val city: String = "",
+    @SerializedName("SubjectRF") val subjectRF: String = "",
+    @SerializedName("DateDelivery") val dateDelivery: String = "",
+    @SerializedName("Lat") val lat: Double = 0.0
+)
