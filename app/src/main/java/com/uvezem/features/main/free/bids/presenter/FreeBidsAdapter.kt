@@ -61,7 +61,7 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 holder.dateTextView?.text = delivery.date
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
-                holder.deliveryPlaceTextView?.text = delivery.deliveryPlace
+                //holder.deliveryPlaceTextView?.text = delivery.deliveryPlace
             }
 
             is FreeBidViewHolderFull -> {
@@ -69,7 +69,7 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 holder.dateTextView?.text = delivery.date
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
-                holder.deliveryPlaceTextView?.text = delivery.deliveryPlace
+                //holder.deliveryPlaceTextView?.text = delivery.deliveryPlace
                 holder.typeTextView?.text = delivery.cargoType
                 holder.veightTextView?.text = delivery.weight.toString()
                 holder.volumeTextView?.text = delivery.volume.toString()
