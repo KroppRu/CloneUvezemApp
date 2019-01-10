@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.uvezem.Constans.Companion.EMPTY_STRING
 import com.uvezem.R
 import com.uvezem.model.DeliveriesItem
+import com.uvezem.model.DeliveryPoint
 
 class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -24,9 +26,7 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
 
     fun updateDeliveries(deliveries: List<DeliveriesItem>) {
         this.deliveries = deliveries
-        //val oldClickedItems = clickedItems.clone()
         clickedItems = Array(deliveries.size) { _ -> false }
-        //clickedItems = clickedItems.copyOf(deliveries.size)
         notifyDataSetChanged()
     }
 
@@ -66,22 +66,22 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
         when (holder) {
             is FreeBidViewHolderCompact -> {
                 holder.elementClickListener = { updateElement(it) }
-                holder.dateTextView?.text = delivery.date
+                holder.dateTextView?.text = delivery.dateShipment
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
-                //holder.deliveryPlaceTextView?.text = delivery.deliveryPlace
+                holder.deliveryPlaceTextView?.text = getDeliveryDestination(delivery.deliveryPoints)
             }
 
             is FreeBidViewHolderFull -> {
                 holder.elementClickListener = { updateElement(it) }
-                holder.dateTextView?.text = delivery.date
+                holder.dateTextView?.text = delivery.dateShipment
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
-                //holder.deliveryPlaceTextView?.text = delivery.deliveryPlace
+                holder.deliveryPlaceTextView?.text = getAllDeliveryDestinations(delivery.deliveryPoints)
                 holder.typeTextView?.text = delivery.cargoType
                 holder.veightTextView?.text = delivery.weight.toString()
                 holder.volumeTextView?.text = delivery.volume.toString()
-
+                holder.logistPhoneTextView?.text = delivery.logistPhone
                 holder.refTextView?.text = if (delivery.refrigerator) {
                     "Рефрижератор"
                 } else {
@@ -89,5 +89,19 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 }
             }
         }
+    }
+
+    private fun getDeliveryDestination(points: List<DeliveryPoint>?): String {
+        val lastPoint = points?.lastOrNull()
+
+        return lastPoint?.city ?: EMPTY_STRING
+    }
+
+    private fun getAllDeliveryDestinations(points: List<DeliveryPoint>?): String {
+        var destinationsPoints: String = EMPTY_STRING
+        points?.forEach {
+            destinationsPoints += "${it.address}\n"
+        }
+        return destinationsPoints
     }
 }

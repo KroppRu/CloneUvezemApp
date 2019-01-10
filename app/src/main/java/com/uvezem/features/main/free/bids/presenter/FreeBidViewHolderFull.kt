@@ -14,6 +14,7 @@ class FreeBidViewHolderFull(val parent: View) : RecyclerView.ViewHolder(parent) 
     var refTextView: TextView? = null
     var veightTextView: TextView? = null
     var volumeTextView: TextView? = null
+    var logistPhoneTextView: TextView? = null
     var elementClickListener: ((Int) -> Unit)? = null
 
     init {
@@ -25,6 +26,7 @@ class FreeBidViewHolderFull(val parent: View) : RecyclerView.ViewHolder(parent) 
         refTextView = parent.findViewById(R.id.refValue)
         veightTextView = parent.findViewById(R.id.veightValue)
         volumeTextView = parent.findViewById(R.id.volumeValue)
+        logistPhoneTextView = parent.findViewById(R.id.logistPhoneValue)
         parent.findViewById<View>(R.id.root_bid_full_item).setOnClickListener {
             elementClickListener?.invoke(adapterPosition)
         }

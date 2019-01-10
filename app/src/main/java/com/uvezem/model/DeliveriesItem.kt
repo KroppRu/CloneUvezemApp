@@ -3,7 +3,7 @@ package com.uvezem.model
 import com.google.gson.annotations.SerializedName
 
 data class DeliveriesItem(
-    @SerializedName("Status") val status: Int = 0,
+    @SerializedName("Status") val status: DeliveryStatus,
     @SerializedName("CoordinateLoadLat") val coordinateLoadLat: Double?,
     @SerializedName("Organization") val organization: String?,
     @SerializedName("AddressWarehouse") val addressWarehouse: String?,
