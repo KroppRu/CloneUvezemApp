@@ -1,5 +1,6 @@
 package com.uvezem.features.network
 
+import com.uvezem.model.Company
 import com.uvezem.model.Deliveries
 import com.uvezem.model.UserApp
 import io.reactivex.Single
@@ -16,4 +17,8 @@ interface ApiRetrofit {
     @GET("v2/delivery/get-free")
     @Headers("Content-Type: application/json")
     fun loadFreeBids(@Header("Authorization") token: String): Single<Deliveries>
+
+    @GET("v2/user/get-companies")
+    @Headers("Content-Type: application/json")
+    fun loadCompanies(@Header("Authorization") token: String): Single<List<Company>>
 }

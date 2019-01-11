@@ -18,9 +18,16 @@ class FreeBidsPresenter(
         private const val TAG = "FreeBidsPresenter"
     }
 
+    init {
+        bidsAdapter.btnFillOrderClickListener = ::listItemClick
+    }
 
     fun loadData() {
         loadBids()
+    }
+
+    private fun listItemClick(bidId: Int) {
+        view.openFillOrderFragment(bidId)
     }
 
     private fun loadBids() {
@@ -36,6 +43,7 @@ class FreeBidsPresenter(
 
     private fun loadBidsOnError(t: Throwable) {
         Log.d(TAG, t.message)
+        t.message?.let { view.showError(it) }
     }
 
     private fun loadBidsOnSuccess(deliveries: Deliveries) {

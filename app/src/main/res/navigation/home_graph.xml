@@ -4,5 +4,10 @@
             android:id="@+id/home_graph" app:startDestination="@id/freeBidsFragment">
 
     <fragment android:id="@+id/freeBidsFragment" android:name="com.uvezem.features.main.free.bids.ui.FreeBidsFragment"
-              android:label="FreeBidsFragment"/>
+              android:label="FreeBidsFragment">
+    </fragment>
+    <fragment android:id="@+id/newOfferFragment" android:name="com.uvezem.features.offer.ui.NewOfferFragment"
+              android:label="NewOfferFragment">
+        <argument android:name="bidId" app:argType="integer" android:defaultValue="-1"/>
+    </fragment>
 </navigation>

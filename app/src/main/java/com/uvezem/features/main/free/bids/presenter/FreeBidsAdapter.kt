@@ -2,7 +2,6 @@ package com.uvezem.features.main.free.bids.presenter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.uvezem.Constans.Companion.EMPTY_STRING
 import com.uvezem.R
@@ -11,7 +10,7 @@ import com.uvezem.model.DeliveryPoint
 
 class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var elementClickListener: ((Int) -> Unit)? = null
+    var btnFillOrderClickListener: ((Int) -> Unit)? = null
 
     companion object {
         private val COMPACT_TYPE = 0
@@ -19,10 +18,6 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
     }
 
     private var clickedItems: Array<Boolean>
-
-    interface ClickListener {
-        fun onItemClick(v: View)
-    }
 
     fun updateDeliveries(deliveries: List<DeliveriesItem>) {
         this.deliveries = deliveries
@@ -86,6 +81,9 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                     "Рефрижератор"
                 } else {
                     "Тент"
+                }
+                holder.newOfferButton?.setOnClickListener{
+                    btnFillOrderClickListener?.invoke(delivery.id)
                 }
             }
         }

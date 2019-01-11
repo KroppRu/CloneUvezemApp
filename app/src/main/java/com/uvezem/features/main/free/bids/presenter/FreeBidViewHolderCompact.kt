@@ -2,6 +2,7 @@ package com.uvezem.features.main.free.bids.presenter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.uvezem.R
 

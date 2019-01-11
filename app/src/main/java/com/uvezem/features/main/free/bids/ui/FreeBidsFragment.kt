@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.Navigation
 import com.uvezem.App
 import com.uvezem.R
 import com.uvezem.data.BidsRepository
@@ -13,6 +15,7 @@ import com.uvezem.domain.BidsInteractor
 import com.uvezem.domain.BidsInteractorImpl
 import com.uvezem.features.main.free.bids.presenter.FreeBidsAdapter
 import com.uvezem.features.main.free.bids.presenter.FreeBidsPresenter
+import com.uvezem.features.offer.ui.NewOfferFragment.Companion.BID_ID_KEY
 import com.uvezem.features.prefs.Preference
 import kotlinx.android.synthetic.main.free_bids_fragment.*
 
@@ -49,6 +52,15 @@ class FreeBidsFragment : Fragment(), FreeBidsView {
     }
 
     override fun showError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+    }
 
+    override fun openFillOrderFragment(bidId: Int) {
+        val navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
+
+        val bundle = Bundle()
+        bundle.putInt(BID_ID_KEY, bidId)
+
+        navController.navigate(R.id.newOfferFragment, bundle)
     }
 }
