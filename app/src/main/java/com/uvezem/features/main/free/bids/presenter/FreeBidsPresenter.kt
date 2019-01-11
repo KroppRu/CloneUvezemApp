@@ -32,7 +32,6 @@ class FreeBidsPresenter(
 
     private fun loadBids() {
         bidsInteractor.loadFreeBids()
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }
             .subscribeBy(

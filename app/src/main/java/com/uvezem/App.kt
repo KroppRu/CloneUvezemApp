@@ -1,7 +1,7 @@
 package com.uvezem
 
 import android.app.Application
-import com.uvezem.features.network.ApiRetrofit
+import com.uvezem.data.network.ApiRetrofit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -1,6 +1,6 @@
 package com.uvezem.domain
 
-import com.uvezem.features.prefs.Preference
+import com.uvezem.data.prefs.Preference
 import com.uvezem.model.UserApp
 
 interface UserInteractor {

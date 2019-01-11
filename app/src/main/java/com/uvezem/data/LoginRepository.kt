@@ -1,7 +1,7 @@
 package com.uvezem.data
 
 import android.util.Base64
-import com.uvezem.features.network.ApiRetrofit
+import com.uvezem.data.network.ApiRetrofit
 import com.uvezem.model.UserApp
 import io.reactivex.Single
 

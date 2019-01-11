@@ -1,4 +1,4 @@
-package com.uvezem.features.prefs
+package com.uvezem.data.prefs
 
 import android.content.SharedPreferences
 import com.google.gson.Gson

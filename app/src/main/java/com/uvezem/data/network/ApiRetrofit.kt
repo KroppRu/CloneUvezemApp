@@ -1,4 +1,4 @@
-package com.uvezem.features.network
+package com.uvezem.data.network
 
 import com.uvezem.model.Company
 import com.uvezem.model.Deliveries
@@ -20,5 +20,5 @@ interface ApiRetrofit {
 
     @GET("v2/user/get-companies")
     @Headers("Content-Type: application/json")
-    fun loadCompanies(@Header("Authorization") token: String): Single<List<Company>>
+    fun loadCompanyData(@Header("Authorization") token: String): Single<List<Company>>
 }

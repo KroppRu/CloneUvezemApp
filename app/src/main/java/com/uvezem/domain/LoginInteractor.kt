@@ -1,7 +1,6 @@
 package com.uvezem.domain
 
 import com.uvezem.data.LoginRepository
-import com.uvezem.features.prefs.Preference
 import com.uvezem.model.UserApp
 import io.reactivex.Single
 

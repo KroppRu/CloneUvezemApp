@@ -15,7 +15,7 @@ import com.uvezem.data.LoginRepository
 import com.uvezem.domain.LoginInteractorImpl
 import com.uvezem.domain.UserInteractorImpl
 import com.uvezem.features.login.presenter.LoginPresenter
-import com.uvezem.features.prefs.Preference
+import com.uvezem.data.prefs.Preference
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : Fragment(), LoginView {

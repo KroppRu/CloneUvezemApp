@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.uvezem.App
 import com.uvezem.R
+import com.uvezem.data.OfferRepository
+import com.uvezem.data.prefs.Preference
 import com.uvezem.features.offer.presenter.NewOfferPresenter
 
 class NewOfferFragment:  Fragment(), NewOfferView {
@@ -20,8 +23,12 @@ class NewOfferFragment:  Fragment(), NewOfferView {
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //initDependency()
+        initDependency()
         return inflater.inflate(R.layout.new_offer_fragment, container, false)
+    }
+
+    private fun initDependency() {
+        val offerRepository = OfferRepository(App.apiRetrofit, Preference())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
