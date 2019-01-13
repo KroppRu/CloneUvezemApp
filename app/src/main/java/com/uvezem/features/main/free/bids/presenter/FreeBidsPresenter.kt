@@ -18,6 +18,8 @@ class FreeBidsPresenter(
         private const val TAG = "FreeBidsPresenter"
     }
 
+    private lateinit var deliveries: Deliveries
+
     init {
         bidsAdapter.btnFillOrderClickListener = ::listItemClick
     }
@@ -50,5 +52,6 @@ class FreeBidsPresenter(
         deliveries.deliveries?.let {
             bidsAdapter.updateDeliveries(it)
         }
+        this.deliveries = deliveries
     }
 }
