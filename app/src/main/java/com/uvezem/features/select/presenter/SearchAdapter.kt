@@ -27,7 +27,7 @@ class SearchAdapter(val searchList: List<String>) : RecyclerView.Adapter<Recycle
         var name: TextView? = null
 
         init {
-            val textInput: TextInputLayout = parent.findViewById(R.id.companyEditText)
+            val textInput: TextInputLayout = parent.findViewById(R.id.companyTIL)
             name = textInput.editText
         }
     }

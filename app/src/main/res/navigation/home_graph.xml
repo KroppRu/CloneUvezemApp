@@ -10,4 +10,6 @@
               android:label="NewOfferFragment">
         <argument android:name="bidId" app:argType="integer" android:defaultValue="-1"/>
     </fragment>
+    <fragment android:id="@+id/selectFragment" android:name="com.uvezem.features.select.ui.SelectFragment"
+              android:label="SelectFragment"/>
 </navigation>

@@ -7,4 +7,10 @@ interface NewOfferView {
     fun hideProgress()
 
     fun showError(error: String)
+
+    fun setAmount(amount: String)
+
+    fun setDate(date: String)
+
+    fun openCompanySelectFragment(companies: List<String>)
 }

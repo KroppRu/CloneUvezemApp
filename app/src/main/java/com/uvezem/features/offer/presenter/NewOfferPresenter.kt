@@ -31,9 +31,15 @@ class NewOfferPresenter(
     private fun prepareDataOnSuccess(dataPair: Pair<List<Company>, DeliveriesItem>) {
         companys = dataPair.first
         bid = dataPair.second
+        view.setAmount(bid.priceDelivery.toString())
+        view.setDate(bid.dateShipment)
     }
 
     private fun prepareDataOnError(t: Throwable) {
 
+    }
+
+    fun onCompanyClick() {
+        view.openCompanySelectFragment(companys.map { it.name })
     }
 }

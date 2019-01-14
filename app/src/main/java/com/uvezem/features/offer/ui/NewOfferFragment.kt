@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.uvezem.App
 import com.uvezem.R
 import com.uvezem.data.BidsRepository
@@ -14,6 +15,9 @@ import com.uvezem.data.prefs.Preference
 import com.uvezem.domain.BidsInteractorImpl
 import com.uvezem.domain.OfferInteractorImpl
 import com.uvezem.features.offer.presenter.NewOfferPresenter
+import com.uvezem.features.select.ui.SelectFragment.Companion.DATA_LIST_KEY
+import kotlinx.android.synthetic.main.new_offer_fragment.*
+import java.util.ArrayList
 
 class NewOfferFragment : Fragment(), NewOfferView {
 
@@ -42,7 +46,7 @@ class NewOfferFragment : Fragment(), NewOfferView {
         arguments?.getInt(BID_ID_KEY)?.let {
             presenter.prepareDataForFilling(it)
         }
-
+        companyEditText.setOnClickListener { presenter.onCompanyClick() }
     }
 
     override fun showProgress() {
@@ -55,5 +59,22 @@ class NewOfferFragment : Fragment(), NewOfferView {
 
     override fun showError(error: String) {
 
+    }
+
+    override fun setAmount(amount: String) {
+        amountEditText.editText?.setText(amount)
+    }
+
+    override fun setDate(date: String) {
+        dateEditText.editText?.setText(date)
+    }
+
+    override fun openCompanySelectFragment(companies: List<String>) {
+        val navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
+
+        val bundle = Bundle()
+        bundle.putStringArrayList(DATA_LIST_KEY, companies as ArrayList<String>)
+
+        navController.navigate(R.id.selectFragment, bundle)
     }
 }
