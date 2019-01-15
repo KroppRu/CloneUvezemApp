@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.uvezem.R
 
 class SearchAdapter(val searchList: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
-        val itemView = LayoutInflater.from(p0.context).inflate(android.R.layout.simple_list_item_1, p0, false)
+        val itemView = LayoutInflater.from(p0.context).inflate(android.R.layout.simple_expandable_list_item_1, p0, false)
         return SearchListViewHolder(itemView)
     }
 
@@ -27,8 +26,8 @@ class SearchAdapter(val searchList: List<String>) : RecyclerView.Adapter<Recycle
         var name: TextView? = null
 
         init {
-            val textInput: TextInputLayout = parent.findViewById(R.id.companyTIL)
-            name = textInput.editText
+            val text = parent.findViewById(android.R.id.text1) as? TextView
+            name = text
         }
     }
 }

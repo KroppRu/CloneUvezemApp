@@ -47,6 +47,7 @@ class NewOfferFragment : Fragment(), NewOfferView {
             presenter.prepareDataForFilling(it)
         }
         companyEditText.setOnClickListener { presenter.onCompanyClick() }
+        personEditText.setOnClickListener { presenter. }
     }
 
     override fun showProgress() {

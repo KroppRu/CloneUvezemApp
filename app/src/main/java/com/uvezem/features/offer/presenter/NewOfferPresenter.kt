@@ -18,6 +18,8 @@ class NewOfferPresenter(
     private lateinit var companys: List<Company>
     private lateinit var bid: DeliveriesItem
 
+    private var selectedCompany: Company? = null
+
     fun prepareDataForFilling(bidId: Int) {
         Singles.zip(offerInteractor.loadCompanyData(), bidsInteractor.loadBid(bidId))
             .observeOn(AndroidSchedulers.mainThread())
@@ -41,5 +43,9 @@ class NewOfferPresenter(
 
     fun onCompanyClick() {
         view.openCompanySelectFragment(companys.map { it.name })
+    }
+
+    fun onPersonClick() {
+        //view.openCompanySelectFragment(selectedCompany?.persons?.map { it.name })
     }
 }
