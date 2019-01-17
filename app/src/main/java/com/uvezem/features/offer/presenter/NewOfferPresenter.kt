@@ -1,5 +1,6 @@
 package com.uvezem.features.offer.presenter
 
+import android.widget.ArrayAdapter
 import com.uvezem.domain.BidsInteractor
 import com.uvezem.domain.OfferInteractor
 import com.uvezem.features.offer.ui.NewOfferView
@@ -33,16 +34,13 @@ class NewOfferPresenter(
     private fun prepareDataOnSuccess(dataPair: Pair<List<Company>, DeliveriesItem>) {
         companys = dataPair.first
         bid = dataPair.second
+        view.setCompanySelectList(companys)
         view.setAmount(bid.priceDelivery.toString())
         view.setDate(bid.dateShipment)
     }
 
     private fun prepareDataOnError(t: Throwable) {
 
-    }
-
-    fun onCompanyClick() {
-        view.openCompanySelectFragment(companys.map { it.name })
     }
 
     fun onPersonClick() {

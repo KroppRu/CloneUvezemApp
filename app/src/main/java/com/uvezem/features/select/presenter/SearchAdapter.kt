@@ -1,6 +1,5 @@
 package com.uvezem.features.select.presenter
 
-import android.support.design.widget.TextInputLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,11 @@ import android.widget.TextView
 
 class SearchAdapter(val searchList: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var elementClickListener: ((Int) -> Unit)? = null
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
-        val itemView = LayoutInflater.from(p0.context).inflate(android.R.layout.simple_expandable_list_item_1, p0, false)
+        val itemView =
+            LayoutInflater.from(p0.context).inflate(android.R.layout.simple_expandable_list_item_1, p0, false)
         return SearchListViewHolder(itemView)
     }
 
@@ -20,6 +22,9 @@ class SearchAdapter(val searchList: List<String>) : RecyclerView.Adapter<Recycle
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         viewHolder as SearchListViewHolder
         viewHolder.name?.text = searchList[position]
+        viewHolder.name?.setOnClickListener {
+            elementClickListener?.invoke(position)
+        }
     }
 
     class SearchListViewHolder(val parent: View) : RecyclerView.ViewHolder(parent) {

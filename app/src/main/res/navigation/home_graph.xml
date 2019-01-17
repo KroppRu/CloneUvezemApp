@@ -11,5 +11,8 @@
         <argument android:name="bidId" app:argType="integer" android:defaultValue="-1"/>
     </fragment>
     <fragment android:id="@+id/selectFragment" android:name="com.uvezem.features.select.ui.SelectFragment"
-              android:label="SelectFragment"/>
+              android:label="SelectFragment">
+        <action android:id="@+id/action_selectFragment_to_newOfferFragment" app:destination="@id/newOfferFragment"
+                app:popUpTo="@+id/newOfferFragment"/>
+    </fragment>
 </navigation>

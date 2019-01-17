@@ -1,10 +1,15 @@
 package com.uvezem.features.offer.ui
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.uvezem.App
@@ -16,8 +21,9 @@ import com.uvezem.domain.BidsInteractorImpl
 import com.uvezem.domain.OfferInteractorImpl
 import com.uvezem.features.offer.presenter.NewOfferPresenter
 import com.uvezem.features.select.ui.SelectFragment.Companion.DATA_LIST_KEY
+import com.uvezem.model.Company
 import kotlinx.android.synthetic.main.new_offer_fragment.*
-import java.util.ArrayList
+import java.util.*
 
 class NewOfferFragment : Fragment(), NewOfferView {
 
@@ -29,6 +35,8 @@ class NewOfferFragment : Fragment(), NewOfferView {
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
+
         initDependency()
         return inflater.inflate(R.layout.new_offer_fragment, container, false)
     }
@@ -46,8 +54,12 @@ class NewOfferFragment : Fragment(), NewOfferView {
         arguments?.getInt(BID_ID_KEY)?.let {
             presenter.prepareDataForFilling(it)
         }
-        companyEditText.setOnClickListener { presenter.onCompanyClick() }
-        personEditText.setOnClickListener { presenter. }
+        //.selec
+    }
+
+    override fun onDestroyView() {
+        Log.d("NewOfferFragment", "DESTROY")
+        super.onDestroyView()
     }
 
     override fun showProgress() {
@@ -70,12 +82,17 @@ class NewOfferFragment : Fragment(), NewOfferView {
         dateEditText.editText?.setText(date)
     }
 
-    override fun openCompanySelectFragment(companies: List<String>) {
-        val navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
+    @SuppressLint("ResourceType")
+    override fun setCompanySelectList(companies: List<Company>) {
+        val spinnerAdapter = ArrayAdapter<Company>(
+            context!!,
+            android.R.id.text1,
+            companies
+        )
+        company.adapter = spinnerAdapter
+    }
 
-        val bundle = Bundle()
-        bundle.putStringArrayList(DATA_LIST_KEY, companies as ArrayList<String>)
-
-        navController.navigate(R.id.selectFragment, bundle)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("newOfferFragment", data.toString())
     }
 }

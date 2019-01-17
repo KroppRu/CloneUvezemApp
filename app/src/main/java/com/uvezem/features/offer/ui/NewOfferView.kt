@@ -1,5 +1,7 @@
 package com.uvezem.features.offer.ui
 
+import com.uvezem.model.Company
+
 interface NewOfferView {
 
     fun showProgress()
@@ -10,7 +12,7 @@ interface NewOfferView {
 
     fun setAmount(amount: String)
 
-    fun setDate(date: String)
+    fun setCompanySelectList(companies: List<Company>)
 
-    fun openCompanySelectFragment(companies: List<String>)
+    fun setDate(date: String)
 }

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="spinner_style">
+        <item name="android:background">@drawable/green_rect_arrow_ui</item>
+        <item name="android:popupBackground">#DFFFFFFF</item>
+    </style>
+
 </resources>
