@@ -1,6 +1,7 @@
 package com.uvezem.features.offer.ui
 
 import com.uvezem.model.Company
+import com.uvezem.model.Person
 
 interface NewOfferView {
 
@@ -14,5 +15,9 @@ interface NewOfferView {
 
     fun setCompanySelectList(companies: List<Company>)
 
+    fun setPersonSelectList(persons: List<Person>)
+
     fun setDate(date: String)
+
+    fun setDatePicker(year: Int, month: Int, day: Int)
 }

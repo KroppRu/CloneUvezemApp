@@ -22,17 +22,18 @@
             android:layout_height="wrap_content"/>
 
     <android.support.design.widget.TextInputLayout
-            android:id="@+id/dateEditText"
+            android:id="@+id/dateTIL"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <EditText
+                android:id="@+id/dateEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Дата загрузки"
-                tools:text="юридическое лицо"
-                android:inputType="datetime"
+                tools:text="Дата загрузки"
+                android:clickable="true"
                 android:drawableRight="@drawable/calendar"/>
 
     </android.support.design.widget.TextInputLayout>

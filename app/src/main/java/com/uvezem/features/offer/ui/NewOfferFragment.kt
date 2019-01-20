@@ -1,7 +1,6 @@
 package com.uvezem.features.offer.ui
 
-import android.annotation.SuppressLint
-import android.content.Intent
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -20,10 +19,9 @@ import com.uvezem.data.prefs.Preference
 import com.uvezem.domain.BidsInteractorImpl
 import com.uvezem.domain.OfferInteractorImpl
 import com.uvezem.features.offer.presenter.NewOfferPresenter
-import com.uvezem.features.select.ui.SelectFragment.Companion.DATA_LIST_KEY
 import com.uvezem.model.Company
+import com.uvezem.model.Person
 import kotlinx.android.synthetic.main.new_offer_fragment.*
-import java.util.*
 
 class NewOfferFragment : Fragment(), NewOfferView {
 
@@ -54,7 +52,14 @@ class NewOfferFragment : Fragment(), NewOfferView {
         arguments?.getInt(BID_ID_KEY)?.let {
             presenter.prepareDataForFilling(it)
         }
-        //.selec
+    }
+
+    override fun setDatePicker(year: Int, month: Int, day: Int) {
+        dateEditText.setOnClickListener {
+            DatePickerDialog(context!!, presenter, year, month, day)
+                //.datePicker.minDate = 1111L
+                .show()
+        }
     }
 
     override fun onDestroyView() {
@@ -79,20 +84,42 @@ class NewOfferFragment : Fragment(), NewOfferView {
     }
 
     override fun setDate(date: String) {
-        dateEditText.editText?.setText(date)
+        dateEditText.setText(date)
     }
 
-    @SuppressLint("ResourceType")
     override fun setCompanySelectList(companies: List<Company>) {
         val spinnerAdapter = ArrayAdapter<Company>(
             context!!,
-            android.R.id.text1,
+            R.layout.custom_spinner_item,
             companies
         )
         company.adapter = spinnerAdapter
+        company.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            //not supported
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                person.adapter = null
+                presenter.onCompanySelect(position)
+            }
+        }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d("newOfferFragment", data.toString())
+    override fun setPersonSelectList(persons: List<Person>) {
+        val spinnerAdapter = ArrayAdapter<Person>(
+            context!!,
+            R.layout.custom_spinner_item,
+            persons
+        )
+
+        person.adapter = spinnerAdapter
+        person.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            //not supported
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                presenter.onPersonSelect(position)
+            }
+        }
     }
 }
