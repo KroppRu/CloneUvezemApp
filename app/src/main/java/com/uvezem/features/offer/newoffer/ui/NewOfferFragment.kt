@@ -1,14 +1,17 @@
-package com.uvezem.features.offer.ui
+package com.uvezem.features.offer.newoffer.ui
 
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.uvezem.App
@@ -18,7 +21,10 @@ import com.uvezem.data.OfferRepository
 import com.uvezem.data.prefs.Preference
 import com.uvezem.domain.BidsInteractorImpl
 import com.uvezem.domain.OfferInteractorImpl
-import com.uvezem.features.offer.presenter.NewOfferPresenter
+import com.uvezem.features.main.HomeActivity
+import com.uvezem.features.offer.details.ui.DetailsOfferFragment.Companion.DETAILS_COMPANY_ID_KEY
+import com.uvezem.features.offer.details.ui.DetailsOfferFragment.Companion.DETAILS_ORDER_ID_KEY
+import com.uvezem.features.offer.newoffer.presenter.NewOfferPresenter
 import com.uvezem.model.Company
 import com.uvezem.model.Person
 import kotlinx.android.synthetic.main.new_offer_fragment.*
@@ -31,6 +37,21 @@ class NewOfferFragment : Fragment(), NewOfferView {
 
     private lateinit var presenter: NewOfferPresenter
     private lateinit var navController: NavController
+
+    private val amountTextWatcher = object : TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {
+            presenter.onAmountValueChanged(p0.toString())
+        }
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            //not supported
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            //not supported
+        }
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
@@ -52,15 +73,24 @@ class NewOfferFragment : Fragment(), NewOfferView {
         arguments?.getInt(BID_ID_KEY)?.let {
             presenter.prepareDataForFilling(it)
         }
+        createOfferButton.setOnClickListener { presenter.onCreateOfferButtonClick() }
+        amountEditText.addTextChangedListener(amountTextWatcher)
     }
 
     override fun setDatePicker(year: Int, month: Int, day: Int) {
+        val dialog = DatePickerDialog(context!!, presenter, year, month, day)
+        dateEditText.setOnFocusChangeListener { _, focus ->
+            if (focus) {
+                (activity as HomeActivity).closeKeyboard()
+                dialog.show()
+            }
+        }
         dateEditText.setOnClickListener {
-            DatePickerDialog(context!!, presenter, year, month, day)
-                //.datePicker.minDate = 1111L
-                .show()
+            (activity as HomeActivity).closeKeyboard()
+            dialog.show()
         }
     }
+
 
     override fun onDestroyView() {
         Log.d("NewOfferFragment", "DESTROY")
@@ -76,11 +106,11 @@ class NewOfferFragment : Fragment(), NewOfferView {
     }
 
     override fun showError(error: String) {
-
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
 
     override fun setAmount(amount: String) {
-        amountEditText.editText?.setText(amount)
+        amountEditText.setText(amount)
     }
 
     override fun setDate(date: String) {
@@ -99,6 +129,7 @@ class NewOfferFragment : Fragment(), NewOfferView {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                (activity as HomeActivity).closeKeyboard()
                 person.adapter = null
                 presenter.onCompanySelect(position)
             }
@@ -118,8 +149,21 @@ class NewOfferFragment : Fragment(), NewOfferView {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                (activity as HomeActivity).closeKeyboard()
                 presenter.onPersonSelect(position)
             }
         }
+    }
+
+    override fun backToMain() {
+        navController.popBackStack()
+    }
+
+    override fun navigateToDetails(orderId: Int, companyId: Int) {
+        val bundle = Bundle()
+        bundle.putInt(DETAILS_COMPANY_ID_KEY, companyId)
+        bundle.putInt(DETAILS_ORDER_ID_KEY, orderId)
+
+        navController.navigate(R.id.detailsOfferFragment, bundle)
     }
 }

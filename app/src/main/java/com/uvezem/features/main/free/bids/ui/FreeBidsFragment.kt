@@ -15,7 +15,7 @@ import com.uvezem.data.prefs.Preference
 import com.uvezem.domain.BidsInteractorImpl
 import com.uvezem.features.main.free.bids.presenter.FreeBidsAdapter
 import com.uvezem.features.main.free.bids.presenter.FreeBidsPresenter
-import com.uvezem.features.offer.ui.NewOfferFragment.Companion.BID_ID_KEY
+import com.uvezem.features.offer.newoffer.ui.NewOfferFragment.Companion.BID_ID_KEY
 import kotlinx.android.synthetic.main.free_bids_fragment.*
 
 class FreeBidsFragment : Fragment(), FreeBidsView {

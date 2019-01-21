@@ -1,4 +1,4 @@
-package com.uvezem.features.offer.ui
+package com.uvezem.features.offer.newoffer.ui
 
 import com.uvezem.model.Company
 import com.uvezem.model.Person
@@ -20,4 +20,8 @@ interface NewOfferView {
     fun setDate(date: String)
 
     fun setDatePicker(year: Int, month: Int, day: Int)
+
+    fun backToMain()
+
+    fun navigateToDetails(orderId: Int, companyId: Int)
 }

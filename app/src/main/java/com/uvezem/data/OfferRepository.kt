@@ -3,6 +3,10 @@ package com.uvezem.data
 import com.uvezem.data.network.ApiRetrofit
 import com.uvezem.data.prefs.Preference
 import com.uvezem.model.Company
+import com.uvezem.model.CompanyDetail
+import com.uvezem.model.Offer
+import com.uvezem.model.Order
+import io.reactivex.Completable
 import io.reactivex.Single
 
 class OfferRepository(
@@ -10,8 +14,18 @@ class OfferRepository(
     private val preference: Preference
 ) {
 
-    fun loadCompanyData(): Single<List<Company>> {
+    fun loadCompanyByUser(): Single<List<Company>> {
         val userApp = preference.getUserApp()
         return apiRetrofit.loadCompanyData("Bearer ${userApp?.token}")
+    }
+
+    fun createOffer(offer: Offer): Single<Order> {
+        val userApp = preference.getUserApp()
+        return apiRetrofit.createOffer("Bearer ${userApp?.token}", offer)
+    }
+
+    fun loadCompanyDetails(companyId: Int): Single<CompanyDetail> {
+        val userApp = preference.getUserApp()
+        return apiRetrofit.loadCompanyDetails("Bearer ${userApp?.token}", companyId)
     }
 }

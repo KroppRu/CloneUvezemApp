@@ -17,13 +17,13 @@
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/person"
             app:hintText="Ответственный"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     <android.support.design.widget.TextInputLayout
             android:id="@+id/dateTIL"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -39,12 +39,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-            android:id="@+id/amountEditText"
+            android:id="@+id/amountTIL"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <EditText
+                android:id="@+id/amountEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Сумма"
@@ -52,6 +53,12 @@
                 android:inputType="numberDecimal"/>
 
     </android.support.design.widget.TextInputLayout>
+
+    <Button
+            android:id="@+id/createOfferButton"
+            android:text="Создать заявку"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

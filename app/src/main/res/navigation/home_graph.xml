@@ -6,7 +6,7 @@
     <fragment android:id="@+id/freeBidsFragment" android:name="com.uvezem.features.main.free.bids.ui.FreeBidsFragment"
               android:label="FreeBidsFragment">
     </fragment>
-    <fragment android:id="@+id/newOfferFragment" android:name="com.uvezem.features.offer.ui.NewOfferFragment"
+    <fragment android:id="@+id/newOfferFragment" android:name="com.uvezem.features.offer.newoffer.ui.NewOfferFragment"
               android:label="NewOfferFragment">
         <argument android:name="bidId" app:argType="integer" android:defaultValue="-1"/>
     </fragment>
@@ -14,5 +14,11 @@
               android:label="SelectFragment">
         <action android:id="@+id/action_selectFragment_to_newOfferFragment" app:destination="@id/newOfferFragment"
                 app:popUpTo="@+id/newOfferFragment"/>
+    </fragment>
+    <fragment android:id="@+id/detailsOfferFragment"
+              android:name="com.uvezem.features.offer.details.ui.DetailsOfferFragment"
+              android:label="DetailsOfferFragment">
+        <argument android:name="bidId" app:argType="integer" android:defaultValue="-1"/>
+        <argument android:name="orderId" app:argType="integer" android:defaultValue="-1"/>
     </fragment>
 </navigation>

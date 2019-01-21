@@ -18,7 +18,7 @@ class BidsRepository(
 
     fun loadBid(bidId: Int): Single<DeliveriesItem> {
         val userApp = preference.getUserApp()
-        return apiRetrofit.loadFreeBids("Bearer ${userApp?.token}", bidId)
+        return apiRetrofit.loadFreeBid("Bearer ${userApp?.token}", bidId)
     }
 
 }

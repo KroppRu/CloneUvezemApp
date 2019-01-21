@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/driver"
+            app:hintText="Выберите водителя"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/truck"
+            app:hintText="Выберите автомобиль"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/trail"
+            app:hintText="Выберите прицеп"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/attachInfoButton"
+            android:text="Прикрепить данные"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

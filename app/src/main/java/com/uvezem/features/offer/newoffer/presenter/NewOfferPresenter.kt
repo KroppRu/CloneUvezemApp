@@ -1,12 +1,13 @@
-package com.uvezem.features.offer.presenter
+package com.uvezem.features.offer.newoffer.presenter
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
 import com.uvezem.domain.BidsInteractor
 import com.uvezem.domain.OfferInteractor
-import com.uvezem.features.offer.ui.NewOfferView
+import com.uvezem.features.offer.newoffer.ui.NewOfferView
 import com.uvezem.model.Company
 import com.uvezem.model.DeliveriesItem
+import com.uvezem.model.Order
 import com.uvezem.model.Person
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Singles
@@ -31,7 +32,7 @@ class NewOfferPresenter(
     private var calendar = Calendar.getInstance(Locale.ENGLISH)
 
     fun prepareDataForFilling(bidId: Int) {
-        Singles.zip(offerInteractor.loadCompanyData(), bidsInteractor.loadBid(bidId))
+        Singles.zip(offerInteractor.loadCompanyByUser(), bidsInteractor.loadBid(bidId))
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }
             .subscribeBy(
@@ -84,5 +85,46 @@ class NewOfferPresenter(
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
+    }
+
+    fun onAmountValueChanged(amountString: String) {
+        amount = if (amountString.isBlank()) {
+            null
+        } else {
+            amountString.toInt()
+        }
+    }
+
+    fun onCreateOfferButtonClick() {
+        if (amount != null
+            && selectedCompany != null
+            && selectedPerson != null
+        ) {
+            offerInteractor.createOffer(
+                bid.id,
+                selectedCompany!!,
+                selectedPerson!!,
+                amount!!,
+                dateFormat.format(calendar.time)
+            )
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showProgress() }
+                .subscribeBy(
+                    onError = ::onCreateofferError,
+                    onSuccess = ::onCreateofferSuccess
+                )
+        } else {
+            view.showError("Необходимо заполнить все данные")
+        }
+    }
+
+    private fun onCreateofferSuccess(order: Order) {
+        view.navigateToDetails(order.id, selectedCompany!!.id)
+    }
+
+    private fun onCreateofferError(t: Throwable) {
+        t.message?.let {
+            view.showError(it)
+        }
     }
 }
