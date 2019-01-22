@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -13,7 +15,10 @@ import com.uvezem.R
 import com.uvezem.data.OfferRepository
 import com.uvezem.data.prefs.Preference
 import com.uvezem.domain.OfferInteractorImpl
+import com.uvezem.features.main.HomeActivity
 import com.uvezem.features.offer.details.presenter.DetailsOfferPresenter
+import com.uvezem.model.Driver
+import kotlinx.android.synthetic.main.details_offer_fragment.*
 
 class DetailsOfferFragment : Fragment(), DetailsOfferView {
 
@@ -22,8 +27,6 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
         const val DETAILS_ORDER_ID_KEY = "DetailsOfferFragment.order.id.key"
     }
 
-    private var companyId: Int? = null
-    private var orderId: Int? = null
 
     private lateinit var navController: NavController
     private lateinit var presenter: DetailsOfferPresenter
@@ -35,16 +38,20 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        var companyId = -1
+        var orderId = -1
+
         arguments?.getInt(DETAILS_COMPANY_ID_KEY)?.let {
             companyId = it
-            presenter.prepareData(it)
         } ?: throw Throwable("DETAILS_COMPANY_ID_KEY is null")
 
         arguments?.getInt(DETAILS_ORDER_ID_KEY)?.let {
             orderId = it
         } ?: throw Throwable("DETAILS_ORDER_ID_KEY is null")
 
+        presenter.prepareData(companyId, orderId)
 
+        attachInfoButton.setOnClickListener { presenter.onAttachBtnClick() }
     }
 
     private fun initDependency() {
@@ -65,5 +72,39 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
 
     override fun showError(error: String) {
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun setDriversSelectList(drivers: List<Driver>) {
+        val spinnerAdapter = ArrayAdapter<Driver>(
+            context!!,
+            R.layout.custom_spinner_item,
+            drivers
+        )
+        driver.adapter = spinnerAdapter
+        driver.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            //not supported
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                (activity as HomeActivity).closeKeyboard()
+                presenter.onDriverSelect(position)
+            }
+        }
+    }
+
+    override fun setTruckName(truckName: String) {
+        truckEditText.setText(truckName)
+    }
+
+    override fun setTrailName(trailName: String) {
+        trailEditText.setText(trailName)
+    }
+
+    override fun navigateToHome() {
+        navController.popBackStack(R.id.freeBidsFragment, false)
     }
 }

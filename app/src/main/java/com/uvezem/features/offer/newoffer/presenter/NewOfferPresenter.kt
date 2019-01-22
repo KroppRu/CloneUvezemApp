@@ -126,5 +126,6 @@ class NewOfferPresenter(
         t.message?.let {
             view.showError(it)
         }
+        view.backToMain()
     }
 }

@@ -2,10 +2,7 @@ package com.uvezem.data
 
 import com.uvezem.data.network.ApiRetrofit
 import com.uvezem.data.prefs.Preference
-import com.uvezem.model.Company
-import com.uvezem.model.CompanyDetail
-import com.uvezem.model.Offer
-import com.uvezem.model.Order
+import com.uvezem.model.*
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -27,5 +24,10 @@ class OfferRepository(
     fun loadCompanyDetails(companyId: Int): Single<CompanyDetail> {
         val userApp = preference.getUserApp()
         return apiRetrofit.loadCompanyDetails("Bearer ${userApp?.token}", companyId)
+    }
+
+    fun attachInfo(offerInfo:OfferInfo): Completable {
+        val userApp = preference.getUserApp()
+        return apiRetrofit.attachInfo("Bearer ${userApp?.token}", offerInfo)
     }
 }

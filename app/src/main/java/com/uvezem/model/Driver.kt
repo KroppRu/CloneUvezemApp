@@ -2,11 +2,11 @@ package com.uvezem.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Drivers(
+data class Driver(
     @SerializedName("Trail")
-    val trail: Trail,
+    val trail: Trail?,
     @SerializedName("Truck")
-    val truck: Truck,
+    val truck: Truck?,
     @SerializedName("Id")
     val id: Int = 0,
     @SerializedName("Name")

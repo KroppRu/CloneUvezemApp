@@ -30,4 +30,8 @@ interface ApiRetrofit {
     @GET("v2/user/get-company/{companyId}")
     @Headers("Content-Type: application/json")
     fun loadCompanyDetails(@Header("Authorization") token: String, @Path("companyId") companyId: Int): Single<CompanyDetail>
+
+    @POST("v2/order-delivery/attach-driver")
+    @Headers("Content-Type: application/json")
+    fun attachInfo(@Header("Authorization") token: String, @Body offerInfo: OfferInfo): Completable
 }

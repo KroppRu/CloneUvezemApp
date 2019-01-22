@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun bottomNavClick(item: MenuItem) {
         when (item.itemId) {
-            R.id.free_bids_item -> navController.navigate(R.id.freeBidsFragment)
+            R.id.free_bids_item -> navController.popBackStack(R.id.freeBidsFragment, false)
         }
     }
 

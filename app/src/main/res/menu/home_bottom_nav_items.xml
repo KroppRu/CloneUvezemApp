@@ -6,17 +6,17 @@
             android:enabled="true"
             android:icon="@drawable/ic_bid_24dp"
             android:title="Свободные рейсы"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="ifRoom"/>
     <item
             android:id="@+id/my_bids_item"
             android:enabled="true"
             android:icon="@drawable/ic_my_bid_24dp"
             android:title="Мои рейсы"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="never"/>
     <item
             android:id="@+id/archive_item"
             android:enabled="true"
             android:icon="@drawable/ic_archive_black_24dp"
             android:title="Архив"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="never"/>
 </menu>
