@@ -63,11 +63,13 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
 
 
     override fun showProgress() {
-
+        progress_bar.visibility = View.VISIBLE
+        dataLayout.visibility = View.GONE
     }
 
     override fun hideProgress() {
-
+        progress_bar.visibility = View.GONE
+        dataLayout.visibility = View.VISIBLE
     }
 
     override fun showError(error: String) {

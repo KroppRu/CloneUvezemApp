@@ -35,12 +35,14 @@ class DetailsOfferPresenter(
     private fun prepareDataOnSuccess(companyDetail: CompanyDetail) {
         this.companyDetail = companyDetail
         view.setDriversSelectList(companyDetail.drivers)
+        view.hideProgress()
     }
 
     private fun prepareDataOnError(t: Throwable) {
         t.message?.let {
             view.showError(it)
         }
+        view.hideProgress()
     }
 
     fun onDriverSelect(position: Int) {
@@ -76,6 +78,7 @@ class DetailsOfferPresenter(
 
     private fun attachInfoOnComplete() {
         view.showMessage("Заявка успешно дополнена, позвоните логисту для уточнения деталей")
+        view.hideProgress()
         view.navigateToHome()
     }
 
@@ -83,6 +86,7 @@ class DetailsOfferPresenter(
         t.message?.let {
             view.showError(it)
         }
+        view.hideProgress()
         view.navigateToHome()
     }
 

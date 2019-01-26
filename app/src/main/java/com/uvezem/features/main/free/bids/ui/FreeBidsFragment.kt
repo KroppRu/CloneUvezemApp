@@ -43,11 +43,13 @@ class FreeBidsFragment : Fragment(), FreeBidsView {
     }
 
     override fun showProgress() {
-
+        progress_bar.visibility = View.VISIBLE
+        free_bid_rv.visibility = View.GONE
     }
 
     override fun hideProgress() {
-
+        progress_bar.visibility = View.GONE
+        free_bid_rv.visibility = View.VISIBLE
     }
 
     override fun showError(error: String) {

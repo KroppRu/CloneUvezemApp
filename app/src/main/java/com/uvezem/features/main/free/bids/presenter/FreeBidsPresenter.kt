@@ -6,7 +6,6 @@ import com.uvezem.features.main.free.bids.ui.FreeBidsView
 import com.uvezem.model.Deliveries
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 
 class FreeBidsPresenter(
     private val view: FreeBidsView,
@@ -44,11 +43,13 @@ class FreeBidsPresenter(
 
     private fun loadBidsOnError(t: Throwable) {
         Log.d(TAG, t.message)
+        view.hideProgress()
         t.message?.let { view.showError(it) }
     }
 
     private fun loadBidsOnSuccess(deliveries: Deliveries) {
         Log.d(TAG, deliveries.toString())
+        view.hideProgress()
         deliveries.deliveries?.let {
             bidsAdapter.updateDeliveries(it)
         }

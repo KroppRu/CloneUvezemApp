@@ -3,10 +3,10 @@ package com.uvezem.features.main
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.uvezem.R
 import kotlinx.android.synthetic.main.home_activity.*
 
@@ -19,13 +19,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
         navController = Navigation.findNavController(this, R.id.nav_home_fragment)
-        homeBottomNavigationView.setOnNavigationItemReselectedListener { bottomNavClick(it) }
-    }
-
-    private fun bottomNavClick(item: MenuItem) {
-        when (item.itemId) {
-            R.id.free_bids_item -> navController.popBackStack(R.id.freeBidsFragment, false)
-        }
+        NavigationUI.setupWithNavController(homeBottomNavigationView, navController)
     }
 
     fun closeKeyboard() {
