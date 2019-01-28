@@ -2,6 +2,7 @@ package com.uvezem.features.main.free.bids.presenter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.uvezem.Constans.Companion.EMPTY_STRING
 import com.uvezem.R
@@ -11,22 +12,23 @@ import com.uvezem.model.DeliveryPoint
 class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var btnFillOrderClickListener: ((Int) -> Unit)? = null
+    var btnCancelClickListener: ((Int) -> Unit)? = null
 
     companion object {
-        private val COMPACT_TYPE = 0
-        private val FULL_TYPE = 1
+        private const val COMPACT_TYPE = 0
+        private const val FULL_TYPE = 1
     }
 
     private var clickedItems: Array<Boolean>
 
     fun updateDeliveries(deliveries: List<DeliveriesItem>) {
         this.deliveries = deliveries
-        clickedItems = Array(deliveries.size) { _ -> false }
+        clickedItems = Array(deliveries.size) { false }
         notifyDataSetChanged()
     }
 
     init {
-        clickedItems = Array(deliveries.size) { _ -> false }
+        clickedItems = Array(deliveries.size) { false }
     }
 
     private fun updateElement(position: Int) {
@@ -65,6 +67,15 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 holder.summTextView?.text = delivery.priceDelivery.toString()
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
                 holder.deliveryPlaceTextView?.text = getDeliveryDestination(delivery.deliveryPoints)
+
+                if (delivery.order == null) {
+                    holder.cancelButton?.visibility = View.GONE
+                } else {
+                    holder.cancelButton?.setOnClickListener {
+                        btnCancelClickListener?.invoke(delivery.order.id)
+                    }
+                    holder.cancelButton?.visibility = View.VISIBLE
+                }
             }
 
             is FreeBidViewHolderFull -> {
@@ -82,8 +93,18 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 } else {
                     "Тент"
                 }
-                holder.newOfferButton?.setOnClickListener{
-                    btnFillOrderClickListener?.invoke(delivery.id)
+                if (delivery.order == null) {
+                    holder.cancelButton?.visibility = View.GONE
+                    holder.newOfferButton?.visibility = View.VISIBLE
+                    holder.newOfferButton?.setOnClickListener {
+                        btnFillOrderClickListener?.invoke(delivery.id)
+                    }
+                } else {
+                    holder.cancelButton?.setOnClickListener {
+                        btnCancelClickListener?.invoke(delivery.order.id)
+                    }
+                    holder.cancelButton?.visibility = View.VISIBLE
+                    holder.newOfferButton?.visibility = View.GONE
                 }
             }
         }

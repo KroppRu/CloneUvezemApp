@@ -2,9 +2,7 @@ package com.uvezem.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Order(
+data class SimpleId(
     @SerializedName("Id")
-    val id: Int,
-    @SerializedName("Status")
-    val status: OrderStatus
+    val id: Int
 )

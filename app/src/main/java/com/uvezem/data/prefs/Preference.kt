@@ -20,6 +20,10 @@ class Preference {
         preferences = App.instance.getSharedPreferences(PREFS_NAME, 0)
     }
 
+    fun getUserAuthToken(): String =
+        "Bearer ${getUserApp()?.token}"
+
+
     fun getUserApp(): UserApp? {
         val userData = preferences.getString(USER_APP_KEY, null)
         return gson.fromJson(userData, UserApp::class.java)

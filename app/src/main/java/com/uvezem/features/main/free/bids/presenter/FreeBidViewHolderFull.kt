@@ -17,6 +17,7 @@ class FreeBidViewHolderFull(val parent: View) : RecyclerView.ViewHolder(parent) 
     var volumeTextView: TextView? = null
     var logistPhoneTextView: TextView? = null
     var newOfferButton: Button? = null
+    var cancelButton: Button? = null
     var elementClickListener: ((Int) -> Unit)? = null
 
     init {

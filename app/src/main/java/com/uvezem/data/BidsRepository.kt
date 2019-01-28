@@ -4,6 +4,8 @@ import com.uvezem.data.network.ApiRetrofit
 import com.uvezem.data.prefs.Preference
 import com.uvezem.model.Deliveries
 import com.uvezem.model.DeliveriesItem
+import com.uvezem.model.SimpleId
+import io.reactivex.Completable
 import io.reactivex.Single
 
 class BidsRepository(
@@ -12,13 +14,15 @@ class BidsRepository(
 ) {
 
     fun loadFreeBids(): Single<Deliveries> {
-        val userApp = preference.getUserApp()
-        return apiRetrofit.loadFreeBids("Bearer ${userApp?.token}")
+        return apiRetrofit.loadFreeBids(preference.getUserAuthToken())
     }
 
     fun loadBid(bidId: Int): Single<DeliveriesItem> {
-        val userApp = preference.getUserApp()
-        return apiRetrofit.loadFreeBid("Bearer ${userApp?.token}", bidId)
+        return apiRetrofit.loadFreeBid(preference.getUserAuthToken(), bidId)
+    }
+
+    fun cancelOrder(simpleId: SimpleId): Completable {
+        return apiRetrofit.cancelOrder(preference.getUserAuthToken(), simpleId)
     }
 
 }

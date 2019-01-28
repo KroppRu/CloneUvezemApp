@@ -34,4 +34,8 @@ interface ApiRetrofit {
     @POST("v2/order-delivery/attach-driver")
     @Headers("Content-Type: application/json")
     fun attachInfo(@Header("Authorization") token: String, @Body offerInfo: OfferInfo): Completable
+
+    @POST("v2/order-delivery/refuse")
+    @Headers("Content-Type: application/json")
+    fun cancelOrder(@Header("Authorization") token: String, @Body simpleId: SimpleId): Completable
 }

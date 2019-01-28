@@ -12,22 +12,18 @@ class OfferRepository(
 ) {
 
     fun loadCompanyByUser(): Single<List<Company>> {
-        val userApp = preference.getUserApp()
-        return apiRetrofit.loadCompanyData("Bearer ${userApp?.token}")
+        return apiRetrofit.loadCompanyData(preference.getUserAuthToken())
     }
 
     fun createOffer(offer: Offer): Single<Order> {
-        val userApp = preference.getUserApp()
-        return apiRetrofit.createOffer("Bearer ${userApp?.token}", offer)
+        return apiRetrofit.createOffer(preference.getUserAuthToken(), offer)
     }
 
     fun loadCompanyDetails(companyId: Int): Single<CompanyDetail> {
-        val userApp = preference.getUserApp()
-        return apiRetrofit.loadCompanyDetails("Bearer ${userApp?.token}", companyId)
+        return apiRetrofit.loadCompanyDetails(preference.getUserAuthToken(), companyId)
     }
 
     fun attachInfo(offerInfo:OfferInfo): Completable {
-        val userApp = preference.getUserApp()
-        return apiRetrofit.attachInfo("Bearer ${userApp?.token}", offerInfo)
+        return apiRetrofit.attachInfo(preference.getUserAuthToken(), offerInfo)
     }
 }

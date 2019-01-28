@@ -155,15 +155,15 @@ class NewOfferFragment : Fragment(), NewOfferView {
         }
     }
 
-    override fun backToMain() {
-        navController.popBackStack()
-    }
-
     override fun navigateToDetails(orderId: Int, companyId: Int) {
         val bundle = Bundle()
         bundle.putInt(DETAILS_COMPANY_ID_KEY, companyId)
         bundle.putInt(DETAILS_ORDER_ID_KEY, orderId)
 
         navController.navigate(R.id.detailsOfferFragment, bundle)
+    }
+
+    override fun navigateToHome() {
+        navController.popBackStack(R.id.freeBidsFragment, false)
     }
 }

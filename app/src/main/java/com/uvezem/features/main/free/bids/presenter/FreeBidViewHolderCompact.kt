@@ -2,14 +2,16 @@ package com.uvezem.features.main.free.bids.presenter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.uvezem.R
 
-class FreeBidViewHolderCompact(val parent: View): RecyclerView.ViewHolder(parent) {
+class FreeBidViewHolderCompact(val parent: View) : RecyclerView.ViewHolder(parent) {
     var dateTextView: TextView? = null
     var summTextView: TextView? = null
     var loadPlaceTextView: TextView? = null
     var deliveryPlaceTextView: TextView? = null
+    var cancelButton: Button? = null
     var elementClickListener: ((Int) -> Unit)? = null
 
     init {
@@ -20,6 +22,7 @@ class FreeBidViewHolderCompact(val parent: View): RecyclerView.ViewHolder(parent
         parent.findViewById<View>(R.id.root_bid_compact_item).setOnClickListener {
             elementClickListener?.invoke(adapterPosition)
         }
+        cancelButton = parent.findViewById(R.id.cancelBtn)
     }
 
 }

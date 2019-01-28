@@ -21,9 +21,31 @@ class FreeBidsPresenter(
 
     init {
         bidsAdapter.btnFillOrderClickListener = ::listItemClick
+        bidsAdapter.btnCancelClickListener = ::btnCancelOnClick
     }
 
     fun loadData() {
+        loadBids()
+    }
+
+    private fun btnCancelOnClick(orderId: Int) {
+        bidsInteractor.cancelOrder(orderId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { view.showProgress() }
+            .subscribeBy(
+                onError = ::cancelOrderOnError,
+                onComplete = ::cancelOrderOnComplete
+            )
+    }
+
+    private fun cancelOrderOnError(t: Throwable) {
+        view.hideProgress()
+        t.message?.let {
+            view.showError(it)
+        }
+    }
+
+    private fun cancelOrderOnComplete() {
         loadBids()
     }
 

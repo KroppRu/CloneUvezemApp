@@ -5,10 +5,7 @@ import android.widget.DatePicker
 import com.uvezem.domain.BidsInteractor
 import com.uvezem.domain.OfferInteractor
 import com.uvezem.features.offer.newoffer.ui.NewOfferView
-import com.uvezem.model.Company
-import com.uvezem.model.DeliveriesItem
-import com.uvezem.model.Order
-import com.uvezem.model.Person
+import com.uvezem.model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.rxkotlin.subscribeBy
@@ -111,21 +108,24 @@ class NewOfferPresenter(
                 .doOnSubscribe { view.showProgress() }
                 .subscribeBy(
                     onError = ::onCreateofferError,
-                    onSuccess = ::onCreateofferSuccess
+                    onSuccess = ::onCreateOfferSuccess
                 )
         } else {
             view.showError("Необходимо заполнить все данные")
         }
     }
 
-    private fun onCreateofferSuccess(order: Order) {
-        view.navigateToDetails(order.id, selectedCompany!!.id)
+    private fun onCreateOfferSuccess(order: Order) {
+        when (order.status) {
+            OrderStatus.APPROVED -> view.navigateToDetails(order.id, selectedCompany!!.id)
+            OrderStatus.NEED_APPROVE -> view.navigateToHome()
+        }
     }
 
     private fun onCreateofferError(t: Throwable) {
         t.message?.let {
             view.showError(it)
         }
-        view.backToMain()
+        view.navigateToHome()
     }
 }

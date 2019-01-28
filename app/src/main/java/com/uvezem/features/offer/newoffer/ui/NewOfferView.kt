@@ -21,7 +21,7 @@ interface NewOfferView {
 
     fun setDatePicker(year: Int, month: Int, day: Int)
 
-    fun backToMain()
-
     fun navigateToDetails(orderId: Int, companyId: Int)
+
+    fun navigateToHome()
 }
