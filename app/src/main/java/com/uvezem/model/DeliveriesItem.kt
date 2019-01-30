@@ -17,7 +17,7 @@ data class DeliveriesItem(
     @SerializedName("CoordinateLoadLon") val coordinateLoadLon: Double = 0.0,
     @SerializedName("Date") val date: String = "",
     @SerializedName("Weight") val weight: Int = 0,
-    @SerializedName("Order") val order: Order?,
+    @SerializedName("Carrier") val carrier: Carrier?,
     @SerializedName("LogistPhone") val logistPhone: String?,
     @SerializedName("Number") val number: Int = 0,
     @SerializedName("Volume") val volume: Int = 0,

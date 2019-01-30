@@ -1,17 +1,19 @@
 package com.uvezem.features.main.archive.presenter
 
 import android.util.Log
+import com.uvezem.BasePresenter
 import com.uvezem.domain.BidsInteractor
 import com.uvezem.features.main.archive.ui.ArchiveBidView
 import com.uvezem.model.Deliveries
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
 class ArchiveBidPresenter(
     private val view: ArchiveBidView,
     private val bidsInteractor: BidsInteractor,
     private val bidsAdapter: ArchiveBidsAdapter
-) {
+): BasePresenter() {
 
     companion object {
         private const val TAG = "MyBidPresenter"
@@ -26,7 +28,7 @@ class ArchiveBidPresenter(
             .subscribeBy(
                 onError = ::loadBidsOnError,
                 onSuccess = ::loadBidsOnSuccess
-            )
+            ).addTo(disposable)
     }
 
 

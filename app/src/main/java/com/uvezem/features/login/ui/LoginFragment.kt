@@ -68,4 +68,9 @@ class LoginFragment : Fragment(), LoginView {
     override fun next() {
         navController.navigate(R.id.homeActivity)
     }
+
+    override fun onDestroy() {
+        presenter.dispose()
+        super.onDestroy()
+    }
 }

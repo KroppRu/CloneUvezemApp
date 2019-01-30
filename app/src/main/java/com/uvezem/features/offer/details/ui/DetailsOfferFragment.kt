@@ -109,4 +109,9 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
     override fun navigateToHome() {
         navController.popBackStack(R.id.freeBidsFragment, false)
     }
+
+    override fun onDestroy() {
+        presenter.dispose()
+        super.onDestroy()
+    }
 }

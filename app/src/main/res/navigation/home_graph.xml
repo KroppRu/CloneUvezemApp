@@ -23,4 +23,6 @@
     </fragment>
     <fragment android:id="@+id/myBidFragment" android:name="com.uvezem.features.main.my.bids.ui.MyBidFragment"
               android:label="MyBidFragment"/>
+    <fragment android:id="@+id/archiveBidFragment" android:name="com.uvezem.features.main.archive.ui.ArchiveBidFragment"
+              android:label="ArchiveBidFragment"/>
 </navigation>

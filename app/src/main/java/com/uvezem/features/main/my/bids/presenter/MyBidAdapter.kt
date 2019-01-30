@@ -12,7 +12,7 @@ import com.uvezem.model.DeliveryStatus
 
 class MyBidAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var btnApplyClickListener: ((Int) -> Unit)? = null
+    var btnApplyClickListener: ((Int, Int) -> Unit)? = null
     var btnCancelClickListener: ((Int) -> Unit)? = null
 
     fun updateDeliveries(deliveries: List<DeliveriesItem>) {
@@ -48,11 +48,14 @@ class MyBidAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerView.
             holder.cancelButton?.visibility = View.VISIBLE
             holder.applyDriverButton?.visibility = View.VISIBLE
             holder.applyDriverButton?.setOnClickListener {
-                btnApplyClickListener?.invoke(delivery.id)
+                delivery.carrier?.let { carrier ->
+                    btnApplyClickListener?.invoke(carrier.order.id, carrier.company.id)
+                }
+
             }
             holder.cancelButton?.setOnClickListener {
-                delivery.order?.let { order ->
-                    btnCancelClickListener?.invoke(order.id)
+                delivery.carrier?.let { carrier ->
+                    btnCancelClickListener?.invoke(carrier.order.id)
                 }
             }
         } else {

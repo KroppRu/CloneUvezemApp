@@ -68,11 +68,11 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 holder.loadPlaceTextView?.text = delivery.addressWarehouse
                 holder.deliveryPlaceTextView?.text = getDeliveryDestination(delivery.deliveryPoints)
 
-                if (delivery.order == null) {
+                if (delivery.carrier == null) {
                     holder.cancelButton?.visibility = View.GONE
                 } else {
                     holder.cancelButton?.setOnClickListener {
-                        btnCancelClickListener?.invoke(delivery.order.id)
+                        btnCancelClickListener?.invoke(delivery.carrier.order.id)
                     }
                     holder.cancelButton?.visibility = View.VISIBLE
                 }
@@ -93,7 +93,7 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                 } else {
                     "Тент"
                 }
-                if (delivery.order == null) {
+                if (delivery.carrier == null) {
                     holder.cancelButton?.visibility = View.GONE
                     holder.newOfferButton?.visibility = View.VISIBLE
                     holder.newOfferButton?.setOnClickListener {
@@ -101,7 +101,7 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
                     }
                 } else {
                     holder.cancelButton?.setOnClickListener {
-                        btnCancelClickListener?.invoke(delivery.order.id)
+                        btnCancelClickListener?.invoke(delivery.carrier.order.id)
                     }
                     holder.cancelButton?.visibility = View.VISIBLE
                     holder.newOfferButton?.visibility = View.GONE

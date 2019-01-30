@@ -66,4 +66,9 @@ class MyBidFragment: Fragment() , MyBidView{
 
         navController.navigate(R.id.detailsOfferFragment, bundle)
     }
+
+    override fun onDestroy() {
+        presenter.dispose()
+        super.onDestroy()
+    }
 }

@@ -48,8 +48,8 @@ class FreeBidsFragment : Fragment(), FreeBidsView {
     }
 
     override fun hideProgress() {
-        progress_bar.visibility = View.GONE
-        rv.visibility = View.VISIBLE
+        progress_bar?.visibility = View.GONE
+        rv?.visibility = View.VISIBLE
     }
 
     override fun showError(error: String) {
@@ -63,5 +63,10 @@ class FreeBidsFragment : Fragment(), FreeBidsView {
         bundle.putInt(BID_ID_KEY, bidId)
 
         navController.navigate(R.id.newOfferFragment, bundle)
+    }
+
+    override fun onDestroy() {
+        presenter.dispose()
+        super.onDestroy()
     }
 }

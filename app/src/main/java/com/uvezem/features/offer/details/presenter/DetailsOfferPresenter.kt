@@ -1,17 +1,19 @@
 package com.uvezem.features.offer.details.presenter
 
+import com.uvezem.BasePresenter
 import com.uvezem.Constans.Companion.EMPTY_STRING
 import com.uvezem.domain.OfferInteractor
 import com.uvezem.features.offer.details.ui.DetailsOfferView
 import com.uvezem.model.CompanyDetail
 import com.uvezem.model.Driver
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
 class DetailsOfferPresenter(
     private val view: DetailsOfferView,
     private val offerInteractor: OfferInteractor
-) {
+) : BasePresenter() {
 
     private var companyId: Int? = null
     private var orderId: Int? = null
@@ -29,7 +31,7 @@ class DetailsOfferPresenter(
             .subscribeBy(
                 onError = ::prepareDataOnError,
                 onSuccess = ::prepareDataOnSuccess
-            )
+            ).addTo(disposable)
     }
 
     private fun prepareDataOnSuccess(companyDetail: CompanyDetail) {
@@ -70,7 +72,7 @@ class DetailsOfferPresenter(
                 .subscribeBy(
                     onError = ::attachInfoOnError,
                     onComplete = ::attachInfoOnComplete
-                )
+                ).addTo(disposable)
         } else {
             view.showError("Необходимо заполнить все данные")
         }

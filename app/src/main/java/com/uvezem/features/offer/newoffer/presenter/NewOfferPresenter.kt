@@ -2,12 +2,14 @@ package com.uvezem.features.offer.newoffer.presenter
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import com.uvezem.BasePresenter
 import com.uvezem.domain.BidsInteractor
 import com.uvezem.domain.OfferInteractor
 import com.uvezem.features.offer.newoffer.ui.NewOfferView
 import com.uvezem.model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Singles
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
@@ -16,7 +18,7 @@ class NewOfferPresenter(
     private val view: NewOfferView,
     private val offerInteractor: OfferInteractor,
     private val bidsInteractor: BidsInteractor
-) : DatePickerDialog.OnDateSetListener {
+) : BasePresenter(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var companys: List<Company>
     private lateinit var bid: DeliveriesItem
@@ -35,7 +37,7 @@ class NewOfferPresenter(
             .subscribeBy(
                 onError = ::prepareDataOnError,
                 onSuccess = ::prepareDataOnSuccess
-            )
+            ).addTo(disposable)
     }
 
     private fun prepareDataOnSuccess(dataPair: Pair<List<Company>, DeliveriesItem>) {
@@ -111,14 +113,13 @@ class NewOfferPresenter(
                 .subscribeBy(
                     onError = ::onCreateofferError,
                     onSuccess = ::onCreateOfferSuccess
-                )
+                ).addTo(disposable)
         } else {
             view.showError("Необходимо заполнить все данные")
         }
     }
 
     private fun onCreateOfferSuccess(order: Order) {
-        //view.hideProgress()
         when (order.status) {
             OrderStatus.APPROVED -> view.navigateToDetails(order.id, selectedCompany!!.id)
             OrderStatus.NEED_APPROVE -> view.navigateToHome()
