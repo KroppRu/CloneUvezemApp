@@ -13,7 +13,7 @@ class MyBidPresenter(
     private val view: MyBidView,
     private val bidsInteractor: BidsInteractor,
     private val bidsAdapter: MyBidAdapter
-): BasePresenter() {
+) : BasePresenter() {
 
     companion object {
         private const val TAG = "MyBidPresenter"
@@ -72,7 +72,6 @@ class MyBidPresenter(
     }
 
     private fun loadBidsOnSuccess(deliveries: Deliveries) {
-        Log.d(TAG, deliveries.toString())
         view.hideProgress()
         deliveries.deliveries?.let {
             bidsAdapter.updateDeliveries(it)

@@ -39,6 +39,6 @@ class BidsInteractorImpl(private val bidsRepository: BidsRepository) : BidsInter
             .subscribeOn(Schedulers.io())
 
     override fun loadArchiveBids(): Single<Deliveries> =
-        bidsRepository.loadMyBids()
+        bidsRepository.loadArchiveBids()
             .subscribeOn(Schedulers.io())
 }

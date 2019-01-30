@@ -19,7 +19,7 @@ import com.uvezem.features.main.my.bids.presenter.MyBidPresenter
 import com.uvezem.features.offer.details.ui.DetailsOfferFragment
 import kotlinx.android.synthetic.main.bids_layout.*
 
-class MyBidFragment: Fragment() , MyBidView{
+class MyBidFragment : Fragment(), MyBidView {
 
     private lateinit var navController: NavController
     private lateinit var presenter: MyBidPresenter
@@ -67,8 +67,8 @@ class MyBidFragment: Fragment() , MyBidView{
         navController.navigate(R.id.detailsOfferFragment, bundle)
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         presenter.dispose()
-        super.onDestroy()
+        super.onDestroyView()
     }
 }
