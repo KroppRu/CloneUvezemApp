@@ -1,4 +1,4 @@
-package com.uvezem.features.main.free.bids.ui
+package com.uvezem.features.main.my.bids.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,31 +7,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.uvezem.App
 import com.uvezem.R
 import com.uvezem.data.BidsRepository
 import com.uvezem.data.prefs.Preference
 import com.uvezem.domain.BidsInteractorImpl
-import com.uvezem.features.main.free.bids.presenter.FreeBidsAdapter
-import com.uvezem.features.main.free.bids.presenter.FreeBidsPresenter
-import com.uvezem.features.offer.newoffer.ui.NewOfferFragment.Companion.BID_ID_KEY
+import com.uvezem.features.main.my.bids.presenter.MyBidAdapter
+import com.uvezem.features.main.my.bids.presenter.MyBidPresenter
+import com.uvezem.features.offer.details.ui.DetailsOfferFragment
 import kotlinx.android.synthetic.main.bids_layout.*
 
-class FreeBidsFragment : Fragment(), FreeBidsView {
+class MyBidFragment: Fragment() , MyBidView{
 
-    private lateinit var presenter: FreeBidsPresenter
+    private lateinit var navController: NavController
+    private lateinit var presenter: MyBidPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
         return inflater.inflate(R.layout.bids_layout, container, false)
     }
 
     private fun initDependency() {
         val bidsRepository = BidsRepository(App.apiRetrofit, Preference())
         val bidsInteractor = BidsInteractorImpl(bidsRepository)
-        val adapter = FreeBidsAdapter(listOf())
+        val adapter = MyBidAdapter(listOf())
         rv.adapter = adapter
-        presenter = FreeBidsPresenter(this, bidsInteractor, adapter)
+        presenter = MyBidPresenter(this, bidsInteractor, adapter)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,12 +59,11 @@ class FreeBidsFragment : Fragment(), FreeBidsView {
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
 
-    override fun openFillOrderFragment(bidId: Int) {
-        val navController = Navigation.findNavController(requireActivity(), R.id.nav_home_fragment)
-
+    override fun openApplyDataFragment(orderId: Int, companyId: Int) {
         val bundle = Bundle()
-        bundle.putInt(BID_ID_KEY, bidId)
+        bundle.putInt(DetailsOfferFragment.DETAILS_COMPANY_ID_KEY, companyId)
+        bundle.putInt(DetailsOfferFragment.DETAILS_ORDER_ID_KEY, orderId)
 
-        navController.navigate(R.id.newOfferFragment, bundle)
+        navController.navigate(R.id.detailsOfferFragment, bundle)
     }
 }

@@ -1,4 +1,4 @@
-package com.uvezem.features.main.free.bids.presenter
+package com.uvezem.features.main.my.bids.presenter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.uvezem.R
 
-class FreeBidViewHolderFull(val parent: View) : RecyclerView.ViewHolder(parent) {
+class MyBidViewHolder(val parent: View) : RecyclerView.ViewHolder(parent) {
     var dateTextView: TextView? = null
     var summTextView: TextView? = null
     var loadPlaceTextView: TextView? = null
@@ -16,9 +16,8 @@ class FreeBidViewHolderFull(val parent: View) : RecyclerView.ViewHolder(parent) 
     var veightTextView: TextView? = null
     var volumeTextView: TextView? = null
     var logistPhoneTextView: TextView? = null
-    var newOfferButton: Button? = null
+    var applyDriverButton: Button? = null
     var cancelButton: Button? = null
-    var elementClickListener: ((Int) -> Unit)? = null
 
     init {
         dateTextView = parent.findViewById(R.id.date_text_view)
@@ -30,11 +29,8 @@ class FreeBidViewHolderFull(val parent: View) : RecyclerView.ViewHolder(parent) 
         veightTextView = parent.findViewById(R.id.veightValue)
         volumeTextView = parent.findViewById(R.id.volumeValue)
         logistPhoneTextView = parent.findViewById(R.id.logistPhoneValue)
-        newOfferButton = parent.findViewById(R.id.fillOrder)
+        applyDriverButton = parent.findViewById(R.id.applyDriver)
         cancelButton = parent.findViewById(R.id.cancelOrderBtn)
-        parent.findViewById<View>(R.id.root_bid_full_item).setOnClickListener {
-            elementClickListener?.invoke(adapterPosition)
-        }
     }
 
 }

@@ -39,6 +39,7 @@ class NewOfferPresenter(
     }
 
     private fun prepareDataOnSuccess(dataPair: Pair<List<Company>, DeliveriesItem>) {
+        view.hideProgress()
         companys = dataPair.first
         bid = dataPair.second
 
@@ -53,6 +54,7 @@ class NewOfferPresenter(
     }
 
     private fun prepareDataOnError(t: Throwable) {
+        view.hideProgress()
         t.message?.let {
             view.showError(it)
         }
@@ -116,6 +118,7 @@ class NewOfferPresenter(
     }
 
     private fun onCreateOfferSuccess(order: Order) {
+        //view.hideProgress()
         when (order.status) {
             OrderStatus.APPROVED -> view.navigateToDetails(order.id, selectedCompany!!.id)
             OrderStatus.NEED_APPROVE -> view.navigateToHome()
@@ -123,6 +126,7 @@ class NewOfferPresenter(
     }
 
     private fun onCreateofferError(t: Throwable) {
+        view.hideProgress()
         t.message?.let {
             view.showError(it)
         }

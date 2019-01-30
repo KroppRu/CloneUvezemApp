@@ -21,4 +21,6 @@
         <argument android:name="bidId" app:argType="integer" android:defaultValue="-1"/>
         <argument android:name="orderId" app:argType="integer" android:defaultValue="-1"/>
     </fragment>
+    <fragment android:id="@+id/myBidFragment" android:name="com.uvezem.features.main.my.bids.ui.MyBidFragment"
+              android:label="MyBidFragment"/>
 </navigation>

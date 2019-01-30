@@ -13,16 +13,19 @@ class BidsRepository(
     private val preference: Preference
 ) {
 
-    fun loadFreeBids(): Single<Deliveries> {
-        return apiRetrofit.loadFreeBids(preference.getUserAuthToken())
-    }
+    fun loadFreeBids(): Single<Deliveries> =
+        apiRetrofit.loadFreeBids(preference.getUserAuthToken())
 
-    fun loadBid(bidId: Int): Single<DeliveriesItem> {
-        return apiRetrofit.loadFreeBid(preference.getUserAuthToken(), bidId)
-    }
+    fun loadArchiveBids(): Single<Deliveries> =
+        apiRetrofit.loadArchiveBids(preference.getUserAuthToken())
 
-    fun cancelOrder(simpleId: SimpleId): Completable {
-        return apiRetrofit.cancelOrder(preference.getUserAuthToken(), simpleId)
-    }
+    fun loadMyBids(): Single<Deliveries> =
+        apiRetrofit.loadMyBids(preference.getUserAuthToken())
 
+    fun loadBid(bidId: Int): Single<DeliveriesItem> =
+        apiRetrofit.loadFreeBid(preference.getUserAuthToken(), bidId)
+
+
+    fun cancelOrder(simpleId: SimpleId): Completable =
+        apiRetrofit.cancelOrder(preference.getUserAuthToken(), simpleId)
 }

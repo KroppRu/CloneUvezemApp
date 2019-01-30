@@ -15,6 +15,10 @@ interface ApiRetrofit {
     @Headers("Content-Type: application/json")
     fun loadFreeBids(@Header("Authorization") token: String): Single<Deliveries>
 
+    @GET("v2/delivery/get-active")
+    @Headers("Content-Type: application/json")
+    fun loadMyBids(@Header("Authorization") token: String): Single<Deliveries>
+
     @GET("v2/delivery/{bidId}")
     @Headers("Content-Type: application/json")
     fun loadFreeBid(@Header("Authorization") token: String, @Path("bidId") bidId: Int): Single<DeliveriesItem>
@@ -38,4 +42,9 @@ interface ApiRetrofit {
     @POST("v2/order-delivery/refuse")
     @Headers("Content-Type: application/json")
     fun cancelOrder(@Header("Authorization") token: String, @Body simpleId: SimpleId): Completable
+
+    @GET("v2/delivery/get-completed")
+    @Headers("Content-Type: application/json")
+    fun loadArchiveBids(@Header("Authorization") token: String): Single<Deliveries>
+
 }
