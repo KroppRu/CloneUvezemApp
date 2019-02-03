@@ -110,8 +110,8 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
         navController.popBackStack(R.id.freeBidsFragment, false)
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         presenter.dispose()
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

@@ -73,7 +73,7 @@ class MyBidPresenter(
 
     private fun loadBidsOnSuccess(deliveries: Deliveries) {
         view.hideProgress()
-        deliveries.deliveries?.let {
+        deliveries.bids?.let {
             bidsAdapter.updateDeliveries(it)
         }
         this.deliveries = deliveries

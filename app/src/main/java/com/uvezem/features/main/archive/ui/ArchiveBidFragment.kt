@@ -67,8 +67,8 @@ class ArchiveBidFragment : Fragment(), ArchiveBidView {
         navController.navigate(R.id.detailsOfferFragment, bundle)
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         presenter.dispose()
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

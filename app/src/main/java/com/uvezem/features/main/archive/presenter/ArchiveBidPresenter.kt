@@ -41,7 +41,7 @@ class ArchiveBidPresenter(
     private fun loadBidsOnSuccess(deliveries: Deliveries) {
         Log.d(TAG, deliveries.toString())
         view.hideProgress()
-        deliveries.deliveries?.let {
+        deliveries.bids?.let {
             bidsAdapter.updateDeliveries(it)
         }
         this.deliveries = deliveries

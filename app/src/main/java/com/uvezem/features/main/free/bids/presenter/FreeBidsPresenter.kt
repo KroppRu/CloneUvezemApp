@@ -6,7 +6,6 @@ import com.uvezem.domain.BidsInteractor
 import com.uvezem.features.main.free.bids.ui.FreeBidsView
 import com.uvezem.model.Deliveries
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
@@ -14,13 +13,13 @@ class FreeBidsPresenter(
     private val view: FreeBidsView,
     private val bidsInteractor: BidsInteractor,
     private val bidsAdapter: FreeBidsAdapter
-): BasePresenter() {
+) : BasePresenter() {
 
     companion object {
         private const val TAG = "FreeBidsPresenter"
     }
 
-    private lateinit var deliveries: Deliveries
+    private var deliveries: Deliveries? = null
 
     init {
         bidsAdapter.btnFillOrderClickListener = ::listItemClick
@@ -74,9 +73,28 @@ class FreeBidsPresenter(
 
     private fun loadBidsOnSuccess(deliveries: Deliveries) {
         view.hideProgress()
-        deliveries.deliveries?.let {
+        deliveries.bids?.let {
             bidsAdapter.updateDeliveries(it)
         }
         this.deliveries = deliveries
+    }
+
+    fun onSearchTextChange(searchText: String) {
+        val filteredList = deliveries?.bids?.filter { bid ->
+            val filteredPoint = bid.deliveryPoints?.firstOrNull {
+                it.city.contains(searchText, true)
+            }
+            val warehouseContainsFilter = bid.addressWarehouse?.contains(searchText, true)
+
+            warehouseContainsFilter ?: false || filteredPoint != null
+        }
+        filteredList?.let {
+            bidsAdapter.updateDeliveries(it)
+        }
+    }
+
+    fun logout() {
+        //TODO убрать пользователя из шары
+        view.navigateToLogin()
     }
 }

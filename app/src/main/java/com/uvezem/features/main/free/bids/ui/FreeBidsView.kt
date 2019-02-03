@@ -9,4 +9,6 @@ interface FreeBidsView {
     fun showError(error: String)
 
     fun openFillOrderFragment(bidId: Int)
+
+    fun navigateToLogin()
 }

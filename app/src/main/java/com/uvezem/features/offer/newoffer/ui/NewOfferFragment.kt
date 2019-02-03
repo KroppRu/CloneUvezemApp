@@ -91,12 +91,6 @@ class NewOfferFragment : Fragment(), NewOfferView {
         }
     }
 
-
-    override fun onDestroyView() {
-        Log.d("NewOfferFragment", "DESTROY")
-        super.onDestroyView()
-    }
-
     override fun showProgress() {
         progress_bar.visibility = View.VISIBLE
         dataLayout.visibility = View.GONE
@@ -169,8 +163,8 @@ class NewOfferFragment : Fragment(), NewOfferView {
         navController.popBackStack(R.id.freeBidsFragment, false)
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         presenter.dispose()
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

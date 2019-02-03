@@ -21,6 +21,16 @@ class FreeBidsAdapter(private var deliveries: List<DeliveriesItem>) : RecyclerVi
 
     private var clickedItems: Array<Boolean>
 
+    //TODO
+//    fun addDeliveries(deliveries: List<DeliveriesItem>) {
+//        this.deliveries = deliveries
+//        val newClickedArray = Array(deliveries.size) { index ->
+//            clickedItems.getOrElse(index) { false }
+//        }
+//        clickedItems = newClickedArray
+//        notifyDataSetChanged()
+//    }
+
     fun updateDeliveries(deliveries: List<DeliveriesItem>) {
         this.deliveries = deliveries
         clickedItems = Array(deliveries.size) { false }
