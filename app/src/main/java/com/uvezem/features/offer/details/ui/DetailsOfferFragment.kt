@@ -25,6 +25,7 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
     companion object {
         const val DETAILS_COMPANY_ID_KEY = "DetailsOfferFragment.company.id.key"
         const val DETAILS_ORDER_ID_KEY = "DetailsOfferFragment.order.id.key"
+        private const val DEFAULT_SPINNER_ITEM_INDEX = 0
     }
 
 
@@ -113,5 +114,10 @@ class DetailsOfferFragment : Fragment(), DetailsOfferView {
     override fun onDestroyView() {
         presenter.dispose()
         super.onDestroyView()
+    }
+
+    override fun setDefaultData() {
+        driver.setSelection(DEFAULT_SPINNER_ITEM_INDEX)
+        presenter.onDriverSelect(DEFAULT_SPINNER_ITEM_INDEX)
     }
 }

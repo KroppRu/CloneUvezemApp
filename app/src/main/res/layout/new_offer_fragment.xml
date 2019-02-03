@@ -21,7 +21,6 @@
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/company"
-                app:hintText="Юридическое лицо"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -29,7 +28,6 @@
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/person"
-                app:hintText="Ответственный"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

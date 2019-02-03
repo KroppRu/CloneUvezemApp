@@ -37,6 +37,9 @@ class DetailsOfferPresenter(
     private fun prepareDataOnSuccess(companyDetail: CompanyDetail) {
         this.companyDetail = companyDetail
         view.setDriversSelectList(companyDetail.drivers)
+        if (companyDetail.drivers.isNotEmpty()) {
+            view.setDefaultData()
+        }
         view.hideProgress()
     }
 

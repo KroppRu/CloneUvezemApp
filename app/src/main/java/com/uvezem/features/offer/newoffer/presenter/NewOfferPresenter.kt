@@ -47,6 +47,10 @@ class NewOfferPresenter(
 
         view.setCompanySelectList(companys)
 
+        if (companys.isNotEmpty()) {
+            view.setDefaultCompany()
+        }
+
         amount = bid.priceDelivery
         view.setAmount(bid.priceDelivery.toString())
 
@@ -66,6 +70,9 @@ class NewOfferPresenter(
         selectedCompany = companys[position]
         selectedPerson = null
         view.setPersonSelectList(selectedCompany!!.persons)
+        if (selectedCompany!!.persons.isNotEmpty()) {
+            view.setDefaultPerson()
+        }
     }
 
     fun onPersonSelect(position: Int) {

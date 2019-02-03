@@ -14,6 +14,8 @@ interface DetailsOfferView {
 
     fun setDriversSelectList(drivers: List<Driver>)
 
+    fun setDefaultData()
+
     fun setTruckName(truckName: String)
 
     fun setTrailName(trailName: String)

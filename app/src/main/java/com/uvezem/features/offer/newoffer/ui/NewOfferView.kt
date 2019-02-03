@@ -15,6 +15,10 @@ interface NewOfferView {
 
     fun setCompanySelectList(companies: List<Company>)
 
+    fun setDefaultCompany()
+
+    fun setDefaultPerson()
+
     fun setPersonSelectList(persons: List<Person>)
 
     fun setDate(date: String)

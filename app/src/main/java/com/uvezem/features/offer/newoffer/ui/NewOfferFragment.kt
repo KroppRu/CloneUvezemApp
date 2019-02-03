@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +32,7 @@ class NewOfferFragment : Fragment(), NewOfferView {
 
     companion object {
         const val BID_ID_KEY = "NewOfferFragment.bid.id.key"
+        private const val DEFAULT_SPINNER_ITEM_INDEX = 0
     }
 
     private lateinit var presenter: NewOfferPresenter
@@ -161,6 +161,16 @@ class NewOfferFragment : Fragment(), NewOfferView {
 
     override fun navigateToHome() {
         navController.popBackStack(R.id.freeBidsFragment, false)
+    }
+
+    override fun setDefaultCompany() {
+        company.setSelection(DEFAULT_SPINNER_ITEM_INDEX)
+        presenter.onCompanySelect(DEFAULT_SPINNER_ITEM_INDEX)
+    }
+
+    override fun setDefaultPerson() {
+        person.setSelection(DEFAULT_SPINNER_ITEM_INDEX)
+        presenter.onPersonSelect(DEFAULT_SPINNER_ITEM_INDEX)
     }
 
     override fun onDestroyView() {
